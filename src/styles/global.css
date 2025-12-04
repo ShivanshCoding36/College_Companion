@@ -1,0 +1,50 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter/index.css";
+
+@layer base {
+  :root {
+    --color-bgDark1: #0A0F1F;
+    --color-bgDark2: #0F172A;
+    --color-bgDark3: #1A2238;
+    --color-neonPink: #FF1E8A;
+    --color-neonPurple: #8A2BE2;
+    --font-family-sans: "Inter Variable", system-ui, sans-serif;
+  }
+
+  html {
+    font-family: "Inter Variable", system-ui, sans-serif;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    background: #0A0F1F;
+    color: white;
+  }
+  
+  #root {
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  .neon-glow {
+    box-shadow:
+      0 6px 30px rgba(255, 30, 138, 0.18),
+      0 0 48px rgba(138, 43, 226, 0.06),
+      inset 0 0 8px rgba(255, 30, 138, 0.04);
+  }
+
+  .neon-border {
+    border-right: 1px solid rgba(255, 30, 138, 0.18);
+    box-shadow:
+      0 0 30px rgba(255, 30, 138, 0.08),
+      inset -1px 0 6px rgba(255, 30, 138, 0.03);
+  }
+
+  .glass {
+    background-color: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(1.25rem);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+}
