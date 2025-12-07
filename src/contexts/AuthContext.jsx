@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
       if (user) {
         // Fetch or create user profile from backend
         try {
-          const response = await fetch(`http://localhost:5000/api/users/${user.uid}`);
+          const response = await fetch(`/api/users/${user.uid}`);
           
           if (response.ok) {
             const contentType = response.headers.get("content-type");
@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
             }
           } else if (response.status === 404) {
             // User not found in database - create profile
-            const createResponse = await fetch("http://localhost:5000/api/users", {
+            const createResponse = await fetch("/api/users", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
@@ -110,7 +110,7 @@ export const AuthProvider = ({ children }) => {
 
   // Create or update user profile in MongoDB
   const createUserProfile = async (userId, profileData) => {
-    const response = await fetch("http://localhost:5000/api/users", {
+    const response = await fetch("/api/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ 
@@ -133,7 +133,7 @@ export const AuthProvider = ({ children }) => {
 
   // Save onboarding data
   const saveOnboarding = async (userId, onboardingData) => {
-    const response = await fetch(`http://localhost:5000/api/users/${userId}/onboarding`, {
+    const response = await fetch(`/api/users/${userId}/onboarding`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(onboardingData),

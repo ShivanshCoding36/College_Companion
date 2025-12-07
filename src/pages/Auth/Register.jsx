@@ -160,11 +160,11 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen w-full bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:via-purple-900 dark:to-gray-900 flex items-center justify-center p-4 relative overflow-hidden">
       {/* Animated background orbs */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
-          className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20"
+          className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500/30 dark:bg-purple-500/20 rounded-full mix-blend-multiply filter blur-xl"
           animate={{
             scale: [1, 1.2, 1],
             x: [0, 50, 0],
@@ -177,7 +177,7 @@ export default function Register() {
           }}
         />
         <motion.div
-          className="absolute -bottom-40 -left-40 w-80 h-80 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20"
+          className="absolute -bottom-40 -left-40 w-80 h-80 bg-pink-500/30 dark:bg-pink-500/20 rounded-full mix-blend-multiply filter blur-xl"
           animate={{
             scale: [1, 1.3, 1],
             x: [0, -50, 0],
@@ -198,13 +198,13 @@ export default function Register() {
         transition={{ duration: 0.5 }}
         className="relative w-full max-w-md"
       >
-        <div className="backdrop-blur-lg bg-white/10 rounded-2xl p-8 shadow-2xl border border-white/20">
+        <div className="bg-white/90 dark:bg-dark-surface/90 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-gray-200 dark:border-gray-700">
           <div className="text-center mb-8">
             <motion.h1
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-4xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent"
+              className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-pink-400 dark:to-purple-400 bg-clip-text text-transparent"
             >
               Join EduCompanion
             </motion.h1>
@@ -212,7 +212,7 @@ export default function Register() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
-              className="text-gray-300 mt-2"
+              className="text-gray-600 dark:text-gray-300 mt-2"
             >
               {isGoogleSignIn ? "Complete your profile" : "Create your account"}
             </motion.p>

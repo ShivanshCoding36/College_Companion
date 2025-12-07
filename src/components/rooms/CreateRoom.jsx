@@ -41,29 +41,29 @@ export default function CreateRoom() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="backdrop-blur-lg bg-white/10 rounded-2xl p-8 border border-white/20"
+      className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 md:p-8"
     >
       <div className="flex items-center gap-3 mb-6">
-        <div className="p-3 bg-pink-500/20 rounded-full">
-          <Plus className="w-6 h-6 text-pink-400" />
+        <div className="p-3 bg-blue-50 dark:bg-blue-500/10 rounded-xl">
+          <Plus className="w-6 h-6 text-blue-600 dark:text-blue-500" />
         </div>
         <div>
-          <h2 className="text-2xl font-bold text-white">Create Room</h2>
-          <p className="text-gray-400 text-sm">Start a new study session</p>
+          <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">Create Room</h2>
+          <p className="text-gray-600 dark:text-gray-400 text-sm">Start a new study session</p>
         </div>
       </div>
 
       {error && (
-        <div className="mb-4 p-4 bg-red-500/20 border border-red-500/50 rounded-lg flex items-center gap-2">
-          <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
-          <p className="text-sm text-red-200">{error}</p>
+        <div className="mb-4 p-4 bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30 rounded-xl flex items-center gap-2">
+          <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0" />
+          <p className="text-sm text-red-700 dark:text-red-400">{error}</p>
         </div>
       )}
 
       {success && (
-        <div className="mb-4 p-4 bg-green-500/20 border border-green-500/50 rounded-lg flex items-center gap-2">
-          <CheckCircle className="w-5 h-5 text-green-400" />
-          <p className="text-sm text-green-200">Room created! Redirecting...</p>
+        <div className="mb-4 p-4 bg-green-50 dark:bg-green-500/10 border border-green-200 dark:border-green-500/30 rounded-xl flex items-center gap-2">
+          <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400" />
+          <p className="text-sm text-green-700 dark:text-green-400">Room created! Redirecting...</p>
         </div>
       )}
 
@@ -72,7 +72,7 @@ export default function CreateRoom() {
         disabled={loading || success}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        className="w-full py-4 px-6 bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white rounded-lg font-semibold transition flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full py-3 md:py-4 px-6 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-xl font-semibold transition flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
       >
         {loading ? (
           <>

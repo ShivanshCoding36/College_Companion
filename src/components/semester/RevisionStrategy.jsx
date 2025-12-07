@@ -124,15 +124,15 @@ export default function RevisionStrategy() {
   const getPriorityColor = (priority) => {
     switch (priority) {
       case "critical":
-        return "bg-red-500/20 border-red-500/40 text-red-400";
+        return "bg-red-50 dark:bg-red-500/10 border-red-200 dark:border-red-500/30 text-red-600 dark:text-red-400";
       case "high":
-        return "bg-orange-500/20 border-orange-500/40 text-orange-400";
+        return "bg-orange-50 dark:bg-orange-500/10 border-orange-200 dark:border-orange-500/30 text-orange-600 dark:text-orange-400";
       case "medium":
-        return "bg-yellow-500/20 border-yellow-500/40 text-yellow-400";
+        return "bg-yellow-50 dark:bg-yellow-500/10 border-yellow-200 dark:border-yellow-500/30 text-yellow-600 dark:text-yellow-400";
       case "low":
-        return "bg-green-500/20 border-green-500/40 text-green-400";
+        return "bg-green-50 dark:bg-green-500/10 border-green-200 dark:border-green-500/30 text-green-600 dark:text-green-400";
       default:
-        return "bg-white/5 border-white/10 text-white/60";
+        return "bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400";
     }
   };
 
@@ -142,35 +142,35 @@ export default function RevisionStrategy() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-bgDark3/50 backdrop-blur-xl rounded-xl border border-white/10 p-6"
+        className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6"
       >
-        <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
-            <Calendar className="w-5 h-5 text-white" />
+        <div className="flex items-center gap-4 mb-6">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-md">
+            <Calendar className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-white">Revision Strategy Generator</h3>
-            <p className="text-sm text-white/60">Smart revision schedule based on time available</p>
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white">Revision Strategy Generator</h3>
+            <p className="text-sm text-gray-500 dark:text-gray-400">Smart revision schedule based on time available</p>
           </div>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-5">
           {/* Syllabus Input */}
           <div>
-            <label className="text-sm text-white/80 mb-2 block">Syllabus Content</label>
+            <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 block">Syllabus Content</label>
             <textarea
               value={syllabus}
               onChange={(e) => setSyllabus(e.target.value)}
               placeholder="Paste your syllabus here..."
               rows={6}
-              className="w-full px-4 py-3 bg-bgDark2/50 border border-white/10 rounded-lg text-white placeholder:text-white/40 focus:border-neonPurple/40 focus:outline-none transition-colors resize-none"
+              className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
             />
           </div>
 
           {/* Days Left Input and Generate Button */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="text-sm text-white/80 mb-2 block">Days Left Until Exam</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 block">Days Left Until Exam</label>
               <input
                 type="number"
                 value={daysLeft}
@@ -178,7 +178,7 @@ export default function RevisionStrategy() {
                 placeholder="e.g., 7"
                 min="1"
                 max="30"
-                className="w-full px-4 py-3 bg-bgDark2/50 border border-white/10 rounded-lg text-white placeholder:text-white/40 focus:border-neonPurple/40 focus:outline-none transition-colors"
+                className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
               />
             </div>
 
@@ -186,7 +186,7 @@ export default function RevisionStrategy() {
               <button
                 onClick={handleGenerate}
                 disabled={isGenerating || !syllabus.trim() || !daysLeft}
-                className="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 disabled:from-white/10 disabled:to-white/10 rounded-lg text-white font-semibold transition-all duration-300 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full px-6 py-3.5 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 disabled:from-gray-300 disabled:to-gray-300 dark:disabled:from-gray-700 dark:disabled:to-gray-700 rounded-xl text-white font-semibold transition-all duration-300 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
               >
                 {isGenerating ? (
                   <>
@@ -195,7 +195,7 @@ export default function RevisionStrategy() {
                   </>
                 ) : (
                   <>
-                    <TrendingUp className="w-4 h-4" />
+                    <TrendingUp className="w-5 h-5" />
                     Generate Strategy
                   </>
                 )}
@@ -210,14 +210,14 @@ export default function RevisionStrategy() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-bgDark3/50 backdrop-blur-xl rounded-xl border border-white/10 p-6"
+          className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6"
         >
           <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-2">
-              <BookMarked className="w-5 h-5 text-neonPurple" />
-              <h3 className="text-lg font-bold text-white">Your Revision Schedule</h3>
+            <div className="flex items-center gap-3">
+              <BookMarked className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white">Your Revision Schedule</h3>
             </div>
-            <span className="text-sm text-white/60 bg-white/5 px-3 py-1 rounded-full">
+            <span className="text-sm text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-4 py-1.5 rounded-full font-medium">
               {schedule.length} days plan
             </span>
           </div>
@@ -225,7 +225,7 @@ export default function RevisionStrategy() {
           {/* Timeline */}
           <div className="relative space-y-8">
             {/* Vertical Line */}
-            <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-neonPink via-neonPurple to-cyan-500" />
+            <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-pink-500 via-indigo-500 to-cyan-500" />
 
             {schedule.map((dayPlan, index) => (
               <motion.div
@@ -236,42 +236,42 @@ export default function RevisionStrategy() {
                 className="relative pl-12"
               >
                 {/* Day Marker */}
-                <div className="absolute left-0 w-8 h-8 rounded-full bg-gradient-to-br from-neonPink to-neonPurple border-4 border-bgDark3 flex items-center justify-center">
-                  <span className="text-white font-bold text-xs">{dayPlan.day}</span>
+                <div className="absolute left-0 w-10 h-10 rounded-full bg-gradient-to-br from-pink-500 to-indigo-500 border-4 border-white dark:border-dark-surface flex items-center justify-center shadow-lg">
+                  <span className="text-white font-bold text-sm">{dayPlan.day}</span>
                 </div>
 
                 {/* Day Content */}
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3 mb-3">
-                    <h4 className="text-white font-bold">Day {dayPlan.day}</h4>
-                    <span className="text-sm text-white/60 bg-white/5 px-2 py-1 rounded">
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3 mb-4">
+                    <h4 className="text-gray-900 dark:text-white font-bold text-lg">Day {dayPlan.day}</h4>
+                    <span className="text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-lg font-medium">
                       {dayPlan.date}
                     </span>
                   </div>
 
                   {/* Sessions */}
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     {dayPlan.sessions.map((session, sessionIndex) => (
                       <div
                         key={sessionIndex}
-                        className="bg-bgDark2/50 rounded-lg p-3 border border-white/5 hover:border-white/10 transition-colors"
+                        className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-colors"
                       >
                         <div className="flex items-start gap-3">
-                          <Clock className="w-4 h-4 text-neonPurple mt-1 flex-shrink-0" />
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <span className="text-sm text-white/80 font-medium">
+                          <Clock className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mt-1 flex-shrink-0" />
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className="text-sm text-gray-700 dark:text-gray-300 font-semibold">
                                 {session.time}
                               </span>
                               <span
-                                className={`text-xs px-2 py-0.5 rounded-full border ${getPriorityColor(
+                                className={`text-xs px-3 py-1 rounded-full border font-medium ${getPriorityColor(
                                   session.priority
                                 )}`}
                               >
                                 {session.priority}
                               </span>
                             </div>
-                            <p className="text-white/90">{session.topic}</p>
+                            <p className="text-gray-900 dark:text-white leading-relaxed">{session.topic}</p>
                           </div>
                         </div>
                       </div>
@@ -283,11 +283,11 @@ export default function RevisionStrategy() {
           </div>
 
           {/* Action Buttons */}
-          <div className="mt-6 pt-6 border-t border-white/10 flex gap-3">
-            <button className="flex-1 px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-neonPurple/40 rounded-lg text-white text-sm font-medium transition-all duration-300">
+          <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700 flex gap-3">
+            <button className="flex-1 px-4 py-3 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 rounded-xl text-gray-700 dark:text-gray-300 text-sm font-semibold transition-all duration-300">
               Export as PDF
             </button>
-            <button className="flex-1 px-4 py-2 bg-gradient-to-r from-neonPink to-neonPurple hover:from-neonPink/80 hover:to-neonPurple/80 rounded-lg text-white text-sm font-medium transition-all duration-300">
+            <button className="flex-1 px-4 py-3 bg-gradient-to-r from-pink-500 to-indigo-500 hover:from-pink-600 hover:to-indigo-600 rounded-xl text-white text-sm font-semibold transition-all duration-300 shadow-lg hover:shadow-xl">
               Add to Calendar
             </button>
           </div>
@@ -296,9 +296,9 @@ export default function RevisionStrategy() {
 
       {/* Empty State */}
       {!schedule && !isGenerating && (
-        <div className="bg-bgDark3/30 backdrop-blur-xl rounded-xl border border-white/5 p-12 text-center">
-          <Calendar className="w-16 h-16 text-white/20 mx-auto mb-4" />
-          <p className="text-white/40 text-sm">
+        <div className="bg-gray-50 dark:bg-gray-800/30 rounded-2xl border border-gray-200 dark:border-gray-700 p-12 text-center">
+          <Calendar className="w-20 h-20 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
+          <p className="text-gray-500 dark:text-gray-400 text-sm">
             Enter your syllabus and days left to generate a revision strategy
           </p>
         </div>

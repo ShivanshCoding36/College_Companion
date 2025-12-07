@@ -100,21 +100,21 @@ export default function RoomPage() {
 
   if (roomLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-8 h-8 text-pink-400 animate-spin" />
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-dark-bg">
+        <Loader2 className="w-8 h-8 text-blue-600 dark:text-blue-500 animate-spin" />
       </div>
     );
   }
 
   if (roomError || !room) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-dark-bg">
         <div className="text-center">
-          <AlertCircle className="w-16 h-16 text-red-400 mx-auto mb-4" />
-          <p className="text-red-400 text-xl mb-4">Room not found</p>
+          <AlertCircle className="w-16 h-16 text-red-600 dark:text-red-500 mx-auto mb-4" />
+          <p className="text-red-700 dark:text-red-400 text-xl mb-4">Room not found</p>
           <button
             onClick={() => navigate("/study-arena")}
-            className="px-4 py-2 bg-pink-500 hover:bg-pink-600 rounded-lg transition"
+            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition shadow-lg"
           >
             Back to Study Arena
           </button>
@@ -125,13 +125,13 @@ export default function RoomPage() {
 
   if (!room.isActive) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-dark-bg">
         <div className="text-center">
-          <AlertCircle className="w-16 h-16 text-yellow-400 mx-auto mb-4" />
-          <p className="text-yellow-400 text-xl mb-4">This room has ended</p>
+          <AlertCircle className="w-16 h-16 text-amber-600 dark:text-amber-500 mx-auto mb-4" />
+          <p className="text-amber-700 dark:text-amber-400 text-xl mb-4">This room has ended</p>
           <button
             onClick={() => navigate("/study-arena")}
-            className="px-4 py-2 bg-pink-500 hover:bg-pink-600 rounded-lg transition"
+            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition shadow-lg"
           >
             Back to Study Arena
           </button>
@@ -141,30 +141,30 @@ export default function RoomPage() {
   }
 
   return (
-    <div className="min-h-screen p-6">
+    <div className="min-h-screen p-4 md:p-6 bg-gray-50 dark:bg-dark-bg">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="backdrop-blur-lg bg-white/10 rounded-2xl p-6 border border-white/20 mb-6"
+          className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-4 md:p-6 mb-6"
         >
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-white mb-2">Study Room</h1>
+              <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">Study Room</h1>
               <div className="flex items-center gap-3">
-                <code className="px-4 py-2 bg-pink-500/20 text-pink-300 rounded-lg font-mono text-sm font-bold">
+                <code className="px-3 md:px-4 py-2 bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded-xl font-mono text-xs md:text-sm font-bold">
                   {roomId.substring(0, 12)}...
                 </code>
                 <button
                   onClick={handleCopyCode}
-                  className="p-2 bg-white/5 hover:bg-white/10 rounded-lg transition"
+                  className="p-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition"
                   title="Copy Room ID"
                 >
                   {copied ? (
-                    <Check className="w-4 h-4 text-green-400" />
+                    <Check className="w-4 h-4 text-green-600 dark:text-green-400" />
                   ) : (
-                    <Copy className="w-4 h-4 text-gray-300" />
+                    <Copy className="w-4 h-4 text-gray-600 dark:text-gray-400" />
                   )}
                 </button>
               </div>
@@ -175,41 +175,41 @@ export default function RoomPage() {
                 <button
                   onClick={handleEndRoom}
                   disabled={actionLoading}
-                  className="flex items-center gap-2 px-4 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-300 rounded-lg transition disabled:opacity-50"
+                  className="flex items-center gap-2 px-3 md:px-4 py-2 bg-red-50 dark:bg-red-500/10 hover:bg-red-100 dark:hover:bg-red-500/20 text-red-600 dark:text-red-400 rounded-xl transition disabled:opacity-50"
                 >
                   <Power className="w-4 h-4" />
-                  End Room
+                  <span className="hidden md:inline">End Room</span>
                 </button>
               ) : (
                 <button
                   onClick={handleLeaveRoom}
                   disabled={actionLoading}
-                  className="flex items-center gap-2 px-4 py-2 bg-yellow-500/20 hover:bg-yellow-500/30 text-yellow-300 rounded-lg transition disabled:opacity-50"
+                  className="flex items-center gap-2 px-3 md:px-4 py-2 bg-amber-50 dark:bg-amber-500/10 hover:bg-amber-100 dark:hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 rounded-xl transition disabled:opacity-50"
                 >
                   <LogOut className="w-4 h-4" />
-                  Leave Room
+                  <span className="hidden md:inline">Leave Room</span>
                 </button>
               )}
             </div>
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
           {/* Members Sidebar */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
-            className="backdrop-blur-lg bg-white/10 rounded-2xl p-6 border border-white/20 lg:col-span-1"
+            className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-4 md:p-6 lg:col-span-1"
           >
             <div className="flex items-center gap-2 mb-4">
-              <Users className="w-5 h-5 text-pink-400" />
-              <h2 className="text-xl font-bold text-white">
+              <Users className="w-5 h-5 text-blue-600 dark:text-blue-500" />
+              <h2 className="text-lg md:text-xl font-bold text-gray-900 dark:text-white">
                 Members ({members.length}/5)
               </h2>
             </div>
             {membersLoading ? (
-              <Loader2 className="w-6 h-6 text-pink-400 animate-spin mx-auto" />
+              <Loader2 className="w-6 h-6 text-blue-600 dark:text-blue-500 animate-spin mx-auto" />
             ) : (
               <div className="space-y-2">
                 {members.map((member) => {
@@ -217,11 +217,11 @@ export default function RoomPage() {
                   return (
                     <div
                       key={member.id}
-                      className="p-3 bg-white/5 rounded-lg flex items-center justify-between"
+                      className="p-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl flex items-center justify-between"
                     >
-                      <span className="text-gray-200">{member.name}</span>
+                      <span className="text-gray-900 dark:text-gray-200">{member.name}</span>
                       {isMemberOwner && (
-                        <span className="px-2 py-0.5 bg-purple-500/20 text-purple-300 rounded text-xs font-semibold">
+                        <span className="px-2 py-0.5 bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 rounded text-xs font-semibold">
                           OWNER
                         </span>
                       )}
@@ -237,10 +237,10 @@ export default function RoomPage() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="backdrop-blur-lg bg-white/10 rounded-2xl p-6 border border-white/20 lg:col-span-2"
+            className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-4 md:p-6 lg:col-span-2"
           >
-            <h2 className="text-xl font-bold text-white mb-4">Study Area</h2>
-            <div className="text-center py-12 text-gray-400">
+            <h2 className="text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-4">Study Area</h2>
+            <div className="text-center py-12 text-gray-600 dark:text-gray-400">
               <p className="text-lg mb-2">Collaborate with your team</p>
               <p className="text-sm">Share notes, discuss topics, and study together</p>
             </div>

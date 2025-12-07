@@ -2,14 +2,17 @@ import SurvivalPlan from '../models/SurvivalPlan.js';
 import Note from '../models/Note.js';
 import { generateSurvivalPlan } from '../services/groqSurvivalPlan.js';
 
-// Generate survival plan using Groq AI
+// Generate survival plan using Perplexity AI
 export const generate = async (req, res) => {
   try {
-    const { userSkills, stressLevel, timeAvailable, examDates, goals, deadline, userId } = req.body;
+    const { skills, stressLevel, timeAvailable, examDates, goals, userSkills, userId } = req.body;
+
+    // Support both 'skills' and 'userSkills' for flexibility
+    const skillsArray = skills || userSkills;
 
     // Validation
-    if (!userSkills || !Array.isArray(userSkills) || userSkills.length === 0) {
-      return res.status(400).json({ error: 'userSkills array is required' });
+    if (!skillsArray || (typeof skillsArray === 'string' && !skillsArray.trim()) || (Array.isArray(skillsArray) && skillsArray.length === 0)) {
+      return res.status(400).json({ error: 'skills is required' });
     }
     if (!stressLevel || !['low', 'medium', 'high'].includes(stressLevel)) {
       return res.status(400).json({ error: 'stressLevel must be low, medium, or high' });
@@ -17,43 +20,43 @@ export const generate = async (req, res) => {
     if (!timeAvailable) {
       return res.status(400).json({ error: 'timeAvailable is required' });
     }
-    if (!examDates || !Array.isArray(examDates) || examDates.length === 0) {
-      return res.status(400).json({ error: 'examDates array is required' });
+    if (!examDates || (typeof examDates === 'string' && !examDates.trim()) || (Array.isArray(examDates) && examDates.length === 0)) {
+      return res.status(400).json({ error: 'examDates is required' });
     }
     if (!goals) {
       return res.status(400).json({ error: 'goals is required' });
     }
-    if (!deadline) {
-      return res.status(400).json({ error: 'deadline is required' });
-    }
+
+    // Convert to arrays if strings
+    const skillsArrayParsed = typeof skillsArray === 'string' ? [skillsArray] : skillsArray;
+    const examDatesArrayParsed = typeof examDates === 'string' ? [examDates] : examDates;
 
     console.log('📝 Generating survival plan...');
-    console.log(`   Skills: ${userSkills.join(', ')}`);
+    console.log(`   Skills: ${skillsArrayParsed.join(', ')}`);
     console.log(`   Stress: ${stressLevel}`);
     console.log(`   Time: ${timeAvailable}`);
-    console.log(`   Exams: ${examDates.join(', ')}`);
+    console.log(`   Exams: ${examDatesArrayParsed.join(', ')}`);
     console.log(`   Goals: ${goals}`);
-    console.log(`   Deadline: ${deadline}`);
 
-    // Generate plan using Groq
+    // Generate plan using Perplexity AI
     const generatedPlan = await generateSurvivalPlan({
-      userSkills,
+      userSkills: skillsArrayParsed,
       stressLevel,
       timeAvailable,
-      examDates,
+      examDates: examDatesArrayParsed,
       goals,
-      deadline,
+      deadline: examDatesArrayParsed[0] || 'Not specified',
     });
 
     // Save to MongoDB
     const survivalPlan = new SurvivalPlan({
       userId: userId || 'anonymous',
-      userSkills,
+      userSkills: skillsArrayParsed,
       stressLevel,
       timeAvailable,
-      examDates,
+      examDates: examDatesArrayParsed,
       goals,
-      deadline,
+      deadline: examDatesArrayParsed[0] || 'Not specified',
       generatedPlan,
     });
 
@@ -69,7 +72,7 @@ export const generate = async (req, res) => {
   } catch (error) {
     console.error('❌ Error generating survival plan:', error.message);
     res.status(500).json({
-      error: 'Failed to generate survival plan',
+      error: 'AI request failed',
       message: error.message,
     });
   }

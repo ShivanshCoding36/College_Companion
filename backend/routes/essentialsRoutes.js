@@ -1,38 +1,25 @@
 import express from 'express';
 import multer from 'multer';
 import path from 'path';
-import fs from 'fs';
+import fetch from 'node-fetch';
 
 const router = express.Router();
 
-// Configure multer for file upload
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const uploadDir = 'uploads/essentials';
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir, { recursive: true });
-    }
-    cb(null, uploadDir);
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, `syllabus-${uniqueSuffix}${path.extname(file.originalname)}`);
-  }
-});
+const storage = multer.memoryStorage();
 
 const upload = multer({
-  storage: storage,
-  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
+  storage,
+  limits: { fileSize: 10 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     const allowedTypes = /jpeg|jpg|png|pdf|mp4/;
     const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
     const mimetype = allowedTypes.test(file.mimetype);
-    
+
     if (mimetype && extname) {
       return cb(null, true);
-    } else {
-      cb(new Error('Only images (JPG, PNG), PDFs, and videos (MP4) are allowed'));
     }
+
+    cb(new Error('Only images (JPG, PNG), PDFs, and MP4 videos are allowed'));
   }
 });
 
@@ -40,24 +27,18 @@ const upload = multer({
 router.post('/extract', upload.single('file'), async (req, res) => {
   try {
     if (!req.file) {
-      return res.status(400).json({
+      return res.json({
         success: false,
         error: 'No file uploaded'
       });
     }
+    const { originalname, mimetype, buffer } = req.file;
+    const base64File = buffer.toString('base64');
 
-    const filePath = req.file.path;
-    const fileType = req.file.mimetype;
-    
-    console.log(`📄 Processing file: ${req.file.originalname} (${fileType})`);
+    console.log(`📄 Processing file: ${originalname} (${mimetype})`);
 
-    // Read file and convert to base64
-    const fileBuffer = fs.readFileSync(filePath);
-    const base64File = fileBuffer.toString('base64');
+    const PERPLEXITY_API_KEY = process.env.PERPLEXITY_API_KEY || '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';
 
-    // Call Perplexity AI API
-    const PERPLEXITY_API_KEY = 'pplx-4ASJYIrWRyjGZ4hCtC7YyQglVRoqS9N7ykdvDRdVCgVwXgtvV';
-    
     const response = await fetch('https://api.perplexity.ai/chat/completions', {
       method: 'POST',
       headers: {
@@ -65,17 +46,15 @@ router.post('/extract', upload.single('file'), async (req, res) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'llama-3.1-sonar-small-128k-online',
+        model: 'pplx-7b-chat',
         messages: [
           {
             role: 'system',
-            content: 'You are an academic analyzer bot. Extract the essential topics, sub-topics and exam-important units from syllabus content. Give clean bullet points only.'
+            content: 'You are an academic analyzer. Extract the core essential topics from the provided syllabus/document and return them as a clean bullet list grouped by importance and mark weightage.'
           },
           {
             role: 'user',
-            content: fileType.includes('pdf') 
-              ? `Analyze this PDF syllabus file and extract: 1) Creative/Application Questions topics, 2) Theory Topics for short answers, 3) Numerical Topics with formulas, 4) Topics typically asked for 2 marks, 3 marks, 14 marks, and 16 marks. Return as JSON with keys: creative, theory, numerical, twoMarks, threeMarks, fourteenMarks, sixteenMarks. Each should be an array of strings.`
-              : `Analyze this syllabus image and extract: 1) Creative/Application Questions topics, 2) Theory Topics for short answers, 3) Numerical Topics with formulas, 4) Topics typically asked for 2 marks, 3 marks, 14 marks, and 16 marks. Return as JSON with keys: creative, theory, numerical, twoMarks, threeMarks, fourteenMarks, sixteenMarks. Each should be an array of strings.`
+            content: `File name: ${originalname}\nMIME type: ${mimetype}\nBase64: ${base64File}\n\nPlease analyze this document and return a JSON object with keys creativeTopics, theoryTopics, numericalTopics, and marksDistribution (containing arrays for twoMarks, threeMarks, fourteenMarks, sixteenMarks). Provide concise bullet points for each array.`
           }
         ],
         temperature: 0.2,
@@ -84,96 +63,54 @@ router.post('/extract', upload.single('file'), async (req, res) => {
     });
 
     if (!response.ok) {
-      throw new Error(`Perplexity API error: ${response.statusText}`);
+      const errorText = await response.text();
+      console.error('Perplexity API error:', errorText);
+      return res.json({
+        success: false,
+        error: 'AI request failed',
+        details: errorText
+      });
     }
 
     const data = await response.json();
-    const aiResponse = data.choices[0]?.message?.content || '';
+    const aiContent = data.choices?.[0]?.message?.content?.trim();
 
-    console.log('🤖 AI Response received');
-
-    // Parse the AI response
-    let essentials;
-    try {
-      // Try to extract JSON from response
-      const jsonMatch = aiResponse.match(/\{[\s\S]*\}/);
-      if (jsonMatch) {
-        essentials = JSON.parse(jsonMatch[0]);
-      } else {
-        // Fallback: create structured data from text response
-        essentials = {
-          creative: extractBulletPoints(aiResponse, 'creative|application'),
-          theory: extractBulletPoints(aiResponse, 'theory|theoretical'),
-          numerical: extractBulletPoints(aiResponse, 'numerical|formula|problem'),
-          twoMarks: extractBulletPoints(aiResponse, '2 mark'),
-          threeMarks: extractBulletPoints(aiResponse, '3 mark'),
-          fourteenMarks: extractBulletPoints(aiResponse, '14 mark'),
-          sixteenMarks: extractBulletPoints(aiResponse, '16 mark')
+    let essentialsPayload;
+    if (aiContent) {
+      try {
+        const jsonMatch = aiContent.match(/\{[\s\S]*\}/);
+        essentialsPayload = jsonMatch ? JSON.parse(jsonMatch[0]) : JSON.parse(aiContent);
+      } catch (parseError) {
+        essentialsPayload = {
+          summary: aiContent,
+          creativeTopics: [],
+          theoryTopics: [],
+          numericalTopics: [],
+          marksDistribution: {
+            twoMarks: [],
+            threeMarks: [],
+            fourteenMarks: [],
+            sixteenMarks: []
+          }
         };
       }
-    } catch (parseError) {
-      console.error('Error parsing AI response:', parseError);
-      // Return raw response as fallback
-      essentials = {
-        creative: [aiResponse],
-        theory: [],
-        numerical: [],
-        twoMarks: [],
-        threeMarks: [],
-        fourteenMarks: [],
-        sixteenMarks: []
-      };
     }
-
-    // Clean up uploaded file
-    fs.unlinkSync(filePath);
-    console.log('✅ File processed and cleaned up');
 
     res.json({
       success: true,
-      essentials: essentials,
-      fileName: req.file.originalname
+      essentials: essentialsPayload || null,
+      raw: aiContent || null,
+      fileName: originalname
     });
-
   } catch (error) {
     console.error('❌ Error processing file:', error);
-    
-    // Clean up file if it exists
-    if (req.file && fs.existsSync(req.file.path)) {
-      fs.unlinkSync(req.file.path);
-    }
 
-    res.status(500).json({
+    res.json({
       success: false,
-      error: error.message || 'Failed to extract essentials from file'
+      error: 'Failed to extract essentials',
+      details: error.message
     });
   }
 });
-
-// Helper function to extract bullet points from text
-function extractBulletPoints(text, keyword) {
-  const lines = text.split('\n');
-  const relevantLines = [];
-  let capturing = false;
-
-  for (const line of lines) {
-    const lowerLine = line.toLowerCase();
-    
-    if (lowerLine.includes(keyword)) {
-      capturing = true;
-      continue;
-    }
-    
-    if (capturing) {
-      if (line.trim().startsWith('-') || line.trim().startsWith('•') || line.trim().startsWith('*')) {
-        relevantLines.push(line.trim().replace(/^[-•*]\s*/, ''));
-      } else if (line.trim() === '' || lowerLine.match(/^\d+\.|marks:|topics:/)) {
-        capturing = false;
-      }
-    }
-  }
-
-  return relevantLines.length > 0 ? relevantLines : ['No specific topics identified'];
-}
 
 export default router;

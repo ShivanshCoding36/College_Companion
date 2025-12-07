@@ -25,15 +25,15 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="min-h-screen p-6">
+    <div className="min-h-screen p-4 md:p-6 bg-gray-50 dark:bg-dark-bg">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="mb-8"
+        className="mb-6 md:mb-8"
       >
-        <h1 className="text-4xl font-bold text-white mb-2">Dashboard</h1>
-        <p className="text-white/60">Welcome back! Here's your academic overview.</p>
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">Dashboard</h1>
+        <p className="text-gray-600 dark:text-gray-400">Welcome back! Here's your academic overview.</p>
       </motion.div>
 
       {/* Stats Cards Grid */}
@@ -73,37 +73,40 @@ export default function Dashboard() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="bg-white/5 backdrop-blur-xl rounded-xl p-6 border border-white/10 mb-8"
-        style={{ boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)" }}
+        className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 mb-6 md:mb-8"
       >
-        <h2 className="text-xl font-semibold text-white mb-6">Attendance Trend</h2>
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Attendance Trend</h2>
         <ResponsiveContainer width="100%" height={250}>
           <LineChart data={attendanceData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.1)" />
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(156, 163, 175, 0.2)" className="dark:opacity-30" />
             <XAxis 
               dataKey="month" 
-              stroke="rgba(255, 255, 255, 0.6)"
+              stroke="currentColor"
+              className="text-gray-600 dark:text-gray-400"
               style={{ fontSize: '12px' }}
             />
             <YAxis 
-              stroke="rgba(255, 255, 255, 0.6)"
+              stroke="currentColor"
+              className="text-gray-600 dark:text-gray-400"
               style={{ fontSize: '12px' }}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: 'rgba(10, 15, 31, 0.9)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                borderRadius: '8px',
-                color: '#fff'
+                backgroundColor: 'var(--tooltip-bg)',
+                border: '1px solid rgba(156, 163, 175, 0.2)',
+                borderRadius: '12px',
+                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)'
               }}
+              labelStyle={{ color: 'var(--tooltip-text)' }}
+              itemStyle={{ color: 'var(--tooltip-text)' }}
             />
             <Line
               type="monotone"
               dataKey="attendance"
-              stroke="#FF1E8A"
+              stroke="#3B82F6"
               strokeWidth={3}
-              dot={{ fill: '#FF1E8A', strokeWidth: 2, r: 5 }}
-              activeDot={{ r: 7, fill: '#FF1E8A', stroke: '#fff', strokeWidth: 2 }}
+              dot={{ fill: '#3B82F6', strokeWidth: 2, r: 5 }}
+              activeDot={{ r: 7, fill: '#3B82F6', stroke: '#fff', strokeWidth: 2 }}
             />
           </LineChart>
         </ResponsiveContainer>

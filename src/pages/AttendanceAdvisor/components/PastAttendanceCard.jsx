@@ -14,7 +14,7 @@ export default function PastAttendanceCard({ attendanceData }) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-bgDark3/50 backdrop-blur-xl rounded-xl border border-white/10 overflow-hidden"
+      className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
     >
       {/* Header */}
       <button
@@ -68,7 +68,7 @@ export default function PastAttendanceCard({ attendanceData }) {
             </div>
 
             {/* Progress Bar */}
-            <div className="relative h-3 bg-bgDark2 rounded-full overflow-hidden">
+            <div className="relative h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: `${attendancePercentage}%` }}
@@ -93,19 +93,19 @@ export default function PastAttendanceCard({ attendanceData }) {
 
           {/* Stats Grid */}
           <div className="grid grid-cols-2 gap-3">
-            <div className="bg-bgDark2/50 rounded-lg p-3 border border-white/5">
-              <p className="text-2xl font-bold text-green-400">{attendedClasses}</p>
-              <p className="text-xs text-white/60">Classes Attended</p>
+            <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-3 border border-gray-200 dark:border-gray-700">
+              <p className="text-2xl font-bold text-green-600 dark:text-green-400">{attendedClasses}</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400">Classes Attended</p>
             </div>
-            <div className="bg-bgDark2/50 rounded-lg p-3 border border-white/5">
-              <p className="text-2xl font-bold text-red-400">{absentClasses}</p>
-              <p className="text-xs text-white/60">Classes Missed</p>
+            <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-3 border border-gray-200 dark:border-gray-700">
+              <p className="text-2xl font-bold text-red-600 dark:text-red-400">{absentClasses}</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400">Classes Missed</p>
             </div>
-            <div className="bg-bgDark2/50 rounded-lg p-3 border border-white/5">
-              <p className="text-2xl font-bold text-white">{totalClasses}</p>
-              <p className="text-xs text-white/60">Total Classes</p>
+            <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-3 border border-gray-200 dark:border-gray-700">
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">{totalClasses}</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400">Total Classes</p>
             </div>
-            <div className="bg-bgDark2/50 rounded-lg p-3 border border-white/5">
+            <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-3 border border-gray-200 dark:border-gray-700">
               <p
                 className={`text-2xl font-bold ${
                   percentageToTarget >= 0 ? "text-green-400" : "text-red-400"

@@ -22,6 +22,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: null
   },
+  onboardingCompleted: {
+    type: Boolean,
+    default: false
+  },
+  onboardingData: {
+    type: Object,
+    default: null
+  },
   createdAt: {
     type: Date,
     default: Date.now
@@ -33,10 +41,6 @@ const userSchema = new mongoose.Schema({
 }, {
   timestamps: true
 });
-
-// Index for faster queries
-userSchema.index({ firebaseUID: 1 });
-userSchema.index({ email: 1 });
 
 const User = mongoose.model('User', userSchema);
 

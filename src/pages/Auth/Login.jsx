@@ -95,7 +95,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-bgDark1">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -108,9 +108,8 @@ export default function Login() {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute -top-40 -left-40 w-96 h-96 rounded-full"
+          className="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-blue-500/20 dark:bg-blue-500/30"
           style={{
-            background: "radial-gradient(circle, rgba(255,30,138,0.3) 0%, transparent 70%)",
             filter: "blur(60px)",
           }}
         />
@@ -125,9 +124,8 @@ export default function Login() {
             ease: "easeInOut",
             delay: 2,
           }}
-          className="absolute -bottom-40 -right-40 w-96 h-96 rounded-full"
+          className="absolute -bottom-40 -right-40 w-96 h-96 rounded-full bg-purple-500/20 dark:bg-purple-500/30"
           style={{
-            background: "radial-gradient(circle, rgba(138,43,226,0.3) 0%, transparent 70%)",
             filter: "blur(60px)",
           }}
         />
@@ -140,19 +138,19 @@ export default function Login() {
         transition={{ duration: 0.5 }}
         className="relative w-full max-w-md"
       >
-        <div className="bg-bgDark2/80 backdrop-blur-xl rounded-2xl border border-white/10 p-8 shadow-2xl">
+        <div className="bg-white/90 dark:bg-dark-surface/90 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700 p-8 shadow-2xl">
           {/* Header */}
           <div className="text-center mb-8">
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-              className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-neonPink to-neonPurple flex items-center justify-center"
+              className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg"
             >
               <Lock className="w-8 h-8 text-white" />
             </motion.div>
-            <h1 className="text-3xl font-bold text-white mb-2">Welcome Back</h1>
-            <p className="text-white/60 text-sm">Sign in to continue your learning journey</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Welcome Back</h1>
+            <p className="text-gray-600 dark:text-gray-400 text-sm">Sign in to continue your learning journey</p>
           </div>
 
           {/* Error Message */}
@@ -160,10 +158,10 @@ export default function Login() {
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mb-6 bg-red-500/10 border border-red-500/30 rounded-xl p-3 flex items-start gap-2"
+              className="mb-6 bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30 rounded-xl p-3 flex items-start gap-2"
             >
-              <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
-              <p className="text-red-400 text-sm">{error}</p>
+              <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
+              <p className="text-red-700 dark:text-red-400 text-sm">{error}</p>
             </motion.div>
           )}
 
@@ -171,32 +169,32 @@ export default function Login() {
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Email Input */}
             <div>
-              <label className="text-sm text-white/80 mb-2 block">Email</label>
+              <label className="text-sm text-gray-700 dark:text-gray-300 mb-2 block font-medium">Email</label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="your.email@college.edu"
-                  className="w-full pl-11 pr-4 py-3 bg-bgDark3/50 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:border-neonPurple/40 focus:outline-none transition-colors"
+                  className="w-full pl-11 pr-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-blue-500 dark:focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-colors"
                 />
               </div>
             </div>
 
             {/* Password Input */}
             <div>
-              <label className="text-sm text-white/80 mb-2 block">Password</label>
+              <label className="text-sm text-gray-700 dark:text-gray-300 mb-2 block font-medium">Password</label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
                 <input
                   type="password"
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="Enter your password"
-                  className="w-full pl-11 pr-4 py-3 bg-bgDark3/50 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:border-neonPurple/40 focus:outline-none transition-colors"
+                  className="w-full pl-11 pr-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-blue-500 dark:focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-colors"
                 />
               </div>
             </div>
@@ -207,7 +205,7 @@ export default function Login() {
               whileTap={{ scale: loading ? 1 : 0.98 }}
               type="submit"
               disabled={loading}
-              className="w-full bg-gradient-to-br from-neonPink to-neonPurple hover:from-neonPink/80 hover:to-neonPurple/80 disabled:from-white/10 disabled:to-white/10 text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:opacity-50"
+              className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:opacity-50 shadow-lg"
             >
               {loading ? (
                 <>
@@ -222,9 +220,9 @@ export default function Login() {
 
           {/* Divider */}
           <div className="flex items-center gap-4 my-6">
-            <div className="flex-1 h-px bg-white/10" />
-            <span className="text-white/40 text-sm">OR</span>
-            <div className="flex-1 h-px bg-white/10" />
+            <div className="flex-1 h-px bg-gray-300 dark:bg-gray-700" />
+            <span className="text-gray-500 dark:text-gray-400 text-sm">OR</span>
+            <div className="flex-1 h-px bg-gray-300 dark:bg-gray-700" />
           </div>
 
           {/* Google Sign In */}
@@ -233,7 +231,7 @@ export default function Login() {
             whileTap={{ scale: loading ? 1 : 0.98 }}
             onClick={handleGoogleSignIn}
             disabled={loading}
-            className="w-full bg-white/5 hover:bg-white/10 disabled:bg-white/5 border border-white/10 hover:border-white/20 text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-3 disabled:cursor-not-allowed disabled:opacity-50"
+            className="w-full bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-3 disabled:cursor-not-allowed disabled:opacity-50 shadow-sm"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path
@@ -257,9 +255,9 @@ export default function Login() {
           </motion.button>
 
           {/* Register Link */}
-          <p className="text-center text-white/60 text-sm mt-6">
+          <p className="text-center text-gray-600 dark:text-gray-400 text-sm mt-6">
             Don't have an account?{" "}
-            <Link to="/register" className="text-neonPurple hover:text-neonPink transition-colors font-medium">
+            <Link to="/register" className="text-blue-600 dark:text-blue-500 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-semibold">
               Sign Up
             </Link>
           </p>

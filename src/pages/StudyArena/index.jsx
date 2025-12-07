@@ -6,17 +6,17 @@ import ExistingRooms from "@/components/rooms/ExistingRooms";
 
 export default function StudyArenaHub() {
   return (
-    <div className="min-h-screen p-6">
+    <div className="min-h-screen p-4 md:p-6 bg-gray-50 dark:bg-dark-bg">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         className="max-w-7xl mx-auto"
       >
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-white mb-4">
+        <div className="text-center mb-8 md:mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             Study Arena
           </h1>
-          <p className="text-xl text-gray-300">
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400">
             Collaborate with friends in real-time study rooms
           </p>
         </div>

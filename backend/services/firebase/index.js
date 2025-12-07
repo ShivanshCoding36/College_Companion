@@ -1,40 +1,59 @@
 import admin from 'firebase-admin';
 import { readFileSync, existsSync } from 'fs';
 import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+import path, { dirname } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-let db;
+let firestoreDb;
+
+const resolveServiceAccountPath = () => {
+  const configuredPath = process.env.FIREBASE_SERVICE_ACCOUNT_PATH || 'serviceAccount.json';
+
+  const candidatePaths = [
+    path.resolve(configuredPath),
+    path.resolve(process.cwd(), configuredPath),
+    path.resolve(__dirname, '../../', configuredPath),
+    path.resolve(__dirname, '../../config', configuredPath),
+    path.resolve(__dirname, '../../firebase-admin-sdk.json'),
+    path.resolve(process.cwd(), 'firebase-admin-sdk.json')
+  ];
+
+  const existingPath = candidatePaths.find((candidate) => existsSync(candidate));
+
+  if (!existingPath) {
+    throw new Error(
+      `Firebase service account file not found. Checked paths: ${candidatePaths.join(', ')}`
+    );
+  }
+
+  return existingPath;
+};
 
 /**
  * Initialize Firebase Admin SDK
  */
 export const initializeFirebase = () => {
   try {
-    const serviceAccountPath = process.env.FIREBASE_SERVICE_ACCOUNT_PATH || './firebase-admin-sdk.json';
-    const fullPath = join(__dirname, '../../', serviceAccountPath);
-    
-    // Check if the file exists
-    if (!existsSync(fullPath)) {
-      throw new Error(`Firebase service account file not found at: ${serviceAccountPath}`);
+    if (admin.apps.length) {
+      firestoreDb = admin.firestore();
+      return { app: admin.app(), db: firestoreDb, auth: admin.auth() };
     }
 
-    const serviceAccount = JSON.parse(
-      readFileSync(fullPath, 'utf8')
-    );
+    const credentialPath = resolveServiceAccountPath();
+    const serviceAccount = JSON.parse(readFileSync(credentialPath, 'utf8'));
 
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount)
     });
 
-    db = admin.firestore();
-    console.log('✅ Firebase initialized successfully');
-    return db;
+    firestoreDb = admin.firestore();
+    console.log(`✅ Firebase initialized using ${credentialPath}`);
+
+    return { app: admin.app(), db: firestoreDb, auth: admin.auth() };
   } catch (error) {
-    // Don't log the full error stack, just the message
-    throw new Error(error.message);
+    throw new Error(`Firebase initialization failed: ${error.message}`);
   }
 };
 
@@ -42,10 +61,22 @@ export const initializeFirebase = () => {
  * Get Firestore database instance
  */
 export const getDb = () => {
-  if (!db) {
-    throw new Error('Firestore not initialized. Call initializeFirebase() first.');
+  if (!admin.apps.length) {
+    initializeFirebase();
   }
-  return db;
+
+  if (!firestoreDb) {
+    firestoreDb = admin.firestore();
+  }
+
+  return firestoreDb;
+};
+
+export const getAuth = () => {
+  if (!admin.apps.length) {
+    initializeFirebase();
+  }
+  return admin.auth();
 };
 
 /**

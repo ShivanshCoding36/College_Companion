@@ -223,11 +223,11 @@ export default function Onboarding() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen w-full bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:via-purple-900 dark:to-gray-900 flex items-center justify-center p-4 relative overflow-hidden">
       {/* Animated background orbs */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
-          className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20"
+          className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500/30 dark:bg-purple-500/20 rounded-full mix-blend-multiply filter blur-xl"
           animate={{
             scale: [1, 1.2, 1],
             x: [0, 50, 0],
@@ -240,7 +240,7 @@ export default function Onboarding() {
           }}
         />
         <motion.div
-          className="absolute -bottom-40 -left-40 w-80 h-80 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20"
+          className="absolute -bottom-40 -left-40 w-80 h-80 bg-pink-500/30 dark:bg-pink-500/20 rounded-full mix-blend-multiply filter blur-xl"
           animate={{
             scale: [1, 1.3, 1],
             x: [0, -50, 0],
@@ -261,16 +261,16 @@ export default function Onboarding() {
         transition={{ duration: 0.5 }}
         className="relative w-full max-w-2xl"
       >
-        <div className="backdrop-blur-lg bg-white/10 rounded-2xl p-8 shadow-2xl border border-white/20">
+        <div className="bg-white/90 dark:bg-dark-surface/90 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-gray-200 dark:border-gray-700">
           {/* Progress Bar */}
           <div className="mb-8">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-sm text-gray-300">Question {currentStep} of {totalSteps}</span>
-              <span className="text-sm text-gray-300">{Math.round((currentStep / totalSteps) * 100)}%</span>
+              <span className="text-sm text-gray-600 dark:text-gray-300">Question {currentStep} of {totalSteps}</span>
+              <span className="text-sm text-gray-600 dark:text-gray-300">{Math.round((currentStep / totalSteps) * 100)}%</span>
             </div>
-            <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+            <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
               <motion.div
-                className="h-full bg-gradient-to-r from-pink-500 to-purple-500"
+                className="h-full bg-gradient-to-r from-blue-500 to-purple-600 dark:from-pink-500 dark:to-purple-500"
                 initial={{ width: 0 }}
                 animate={{ width: `${(currentStep / totalSteps) * 100}%` }}
                 transition={{ duration: 0.5 }}

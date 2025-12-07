@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { ThemeProvider } from "./contexts/ThemeContext";
 import { AuthProvider } from "./contexts/AuthContext";
 import { RoomProvider } from "./contexts/RoomContext";
 import AppLayout from "./layout/AppLayout";
@@ -10,44 +11,43 @@ import AttendanceAdvisor from "./pages/AttendanceAdvisor";
 import SemesterSurvival from "./pages/SemesterSurvival";
 import StudyArenaHub from "./pages/StudyArena";
 import RoomPage from "./pages/StudyArena/RoomPage.jsx";
+import Profile from "./pages/Profile";
 import PrivateRoute from "./components/PrivateRoute";
-
-function Profile() {
-  return <div className="text-2xl">Profile</div>;
-}
 
 function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <RoomProvider>
-          <Routes>
-            {/* Public Routes */}
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/onboarding" element={
-              <PrivateRoute>
-                <Onboarding />
-              </PrivateRoute>
-            } />
+      <ThemeProvider>
+        <AuthProvider>
+          <RoomProvider>
+            <Routes>
+              {/* Public Routes */}
+              <Route path="/" element={<Navigate to="/dashboard" replace />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/onboarding" element={
+                <PrivateRoute>
+                  <Onboarding />
+                </PrivateRoute>
+              } />
 
-            {/* Protected Routes */}
-            <Route element={
-              <PrivateRoute>
-                <AppLayout />
-              </PrivateRoute>
-            }>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/attendance-advisor" element={<AttendanceAdvisor />} />
-              <Route path="/semester-survival" element={<SemesterSurvival />} />
-              <Route path="/study-arena" element={<StudyArenaHub />} />
-              <Route path="/study-arena/room/:roomCode" element={<RoomPage />} />
-              <Route path="/profile" element={<Profile />} />
-            </Route>
-          </Routes>
-        </RoomProvider>
-      </AuthProvider>
+              {/* Protected Routes */}
+              <Route element={
+                <PrivateRoute>
+                  <AppLayout />
+                </PrivateRoute>
+              }>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/attendance-advisor" element={<AttendanceAdvisor />} />
+                <Route path="/semester-survival" element={<SemesterSurvival />} />
+                <Route path="/study-arena" element={<StudyArenaHub />} />
+                <Route path="/study-arena/room/:roomCode" element={<RoomPage />} />
+                <Route path="/profile" element={<Profile />} />
+              </Route>
+            </Routes>
+          </RoomProvider>
+        </AuthProvider>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

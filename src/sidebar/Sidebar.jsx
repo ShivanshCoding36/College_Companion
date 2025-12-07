@@ -6,9 +6,11 @@ import {
   BookOpen,
   MessageCircle,
   User,
+  Sun,
+  Moon,
 } from "lucide-react";
 import SidebarItem from "./SidebarItem";
-import Card from "../components/ui/Card";
+import { useTheme } from "../contexts/ThemeContext";
 
 const MENU = [
   { label: "Dashboard", path: "/dashboard", icon: Home },
@@ -20,61 +22,128 @@ const MENU = [
 
 export default function Sidebar() {
   const [expanded, setExpanded] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <motion.aside
-      initial={{ width: 70 }}
-      animate={{ width: expanded ? 240 : 70 }}
-      onHoverStart={() => setExpanded(true)}
-      onHoverEnd={() => setExpanded(false)}
-      transition={{ type: "spring", stiffness: 260, damping: 30 }}
-      className="flex flex-col h-screen py-4 px-2 backdrop-blur-xl bg-white/5 border-r border-white/10 neon-border"
-      aria-label="Sidebar"
-      style={{ minWidth: 70 }}
-    >
-      <div className="px-2 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <motion.span
-            className="w-3 h-3 rounded-full bg-[#FF1E8A] shadow-[0_0_18px_rgba(255,30,138,0.35)]"
-            aria-hidden
-            animate={{ scale: [1, 1.12, 1], opacity: [1, 0.8, 1] }}
-            transition={{ duration: 2.2, repeat: Infinity }}
-            title="neon-dot"
-          />
-          {expanded && (
-            <motion.h1
-              initial={{ opacity: 0, x: -6 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="text-lg font-semibold tracking-wide"
+    <>
+      {/* Desktop Sidebar */}
+      <motion.aside
+        initial={{ width: 70 }}
+        animate={{ width: expanded ? 240 : 70 }}
+        onHoverStart={() => setExpanded(true)}
+        onHoverEnd={() => setExpanded(false)}
+        transition={{ type: "spring", stiffness: 260, damping: 30 }}
+        className="hidden md:flex flex-col h-screen py-4 px-2 bg-white dark:bg-dark-surface border-r border-gray-200 dark:border-dark-border shadow-lg"
+        aria-label="Sidebar"
+        style={{ minWidth: 70 }}
+      >
+        {/* Logo */}
+        <div className="px-2 flex items-center justify-between mb-8">
+          <div className="flex items-center gap-3">
+            <motion.div
+              className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 flex items-center justify-center shadow-lg"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              College Companion
-            </motion.h1>
-          )}
+              <span className="text-white font-bold text-xl">CC</span>
+            </motion.div>
+            {expanded && (
+              <motion.div
+                initial={{ opacity: 0, x: -6 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="overflow-hidden"
+              >
+                <h1 className="text-base font-semibold text-gray-900 dark:text-white whitespace-nowrap">
+                  College
+                </h1>
+                <p className="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                  Companion
+                </p>
+              </motion.div>
+            )}
+          </div>
         </div>
-      </div>
 
-      <nav className="mt-6 px-1 flex-1">
-        <ul className="flex flex-col gap-1">
-          {MENU.map((m) => (
-            <li key={m.path}>
+        {/* Navigation */}
+        <nav className="flex-1 px-1">
+          <ul className="flex flex-col gap-1">
+            {MENU.map((m) => (
+              <li key={m.path}>
+                <SidebarItem
+                  icon={m.icon}
+                  label={m.label}
+                  path={m.path}
+                  collapsed={!expanded}
+                />
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Theme Toggle */}
+        <div className="px-2 mb-4">
+          <motion.button
+            onClick={toggleTheme}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl transition-colors ${
+              expanded ? 'justify-start' : 'justify-center'
+            } bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700`}
+            title={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+          >
+            {theme === 'light' ? (
+              <Moon className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+            ) : (
+              <Sun className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+            )}
+            {expanded && (
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
+              </span>
+            )}
+          </motion.button>
+        </div>
+
+        {/* Version */}
+        {expanded && (
+          <div className="px-2 mb-2">
+            <div className="px-3 py-2 text-xs text-center text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+              <div className="font-medium">v1.0.0</div>
+            </div>
+          </div>
+        )}
+      </motion.aside>
+
+      {/* Mobile Bottom Navigation */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-dark-surface border-t border-gray-200 dark:border-dark-border shadow-lg">
+        <ul className="flex items-center justify-around px-2 py-2">
+          {MENU.slice(0, 4).map((m) => (
+            <li key={m.path} className="flex-1">
               <SidebarItem
                 icon={m.icon}
                 label={m.label}
                 path={m.path}
-                collapsed={!expanded}
+                collapsed={true}
+                isMobile={true}
               />
             </li>
           ))}
+          <li className="flex-1">
+            <button
+              onClick={toggleTheme}
+              className="flex flex-col items-center justify-center w-full py-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >
+              {theme === 'light' ? (
+                <Moon className="w-6 h-6" />
+              ) : (
+                <Sun className="w-6 h-6" />
+              )}
+              <span className="text-xs mt-1">Theme</span>
+            </button>
+          </li>
         </ul>
       </nav>
-
-      <div className="px-2 mb-4 mt-auto">
-        <Card className={`w-full ${expanded ? "" : "mx-auto max-w-[48px]"}`}>
-          <div className="px-3 py-2 text-xs text-white/80 border border-[#FF1E8A]/20 rounded-md neon-glow">
-            <div className="font-medium">v1.0.0</div>
-          </div>
-        </Card>
-      </div>
-    </motion.aside>
+    </>
   );
 }
+

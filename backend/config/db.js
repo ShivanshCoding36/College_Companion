@@ -2,9 +2,17 @@ import mongoose from 'mongoose';
 
 const connectDB = async () => {
   try {
-    const mongoURI = process.env.MONGO_URI || 'mongodb+srv://yugenjr847:yugen842007@yugen.zbssgmq.mongodb.net/test?retryWrites=true&w=majority&appName=yugen';
+    // Use MONGO_URI from environment variable
+    const mongoURI = process.env.MONGO_URI;
     
-    const conn = await mongoose.connect(mongoURI);
+    if (!mongoURI) {
+      throw new Error('MONGO_URI environment variable is not defined');
+    }
+    
+    const conn = await mongoose.connect(mongoURI, {
+      // Modern Mongoose doesn't need these options, but included for compatibility
+      serverSelectionTimeoutMS: 5000,
+    });
 
     console.log('✅ MongoDB Connected');
     console.log(`📊 Database: ${conn.connection.db.databaseName}`);

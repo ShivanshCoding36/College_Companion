@@ -56,7 +56,7 @@ export default function AttendanceAdvisor() {
   };
 
   return (
-    <div className="min-h-screen p-4 md:p-6">
+    <div className="min-h-screen p-4 md:p-6 bg-gray-50 dark:bg-dark-bg">
       {/* Page Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -64,10 +64,10 @@ export default function AttendanceAdvisor() {
         transition={{ duration: 0.5 }}
         className="mb-6"
       >
-        <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
           🎯 Attendance Advisor
         </h1>
-        <p className="text-white/60">
+        <p className="text-gray-600 dark:text-gray-400">
           AI-powered leave planning and attendance management assistant
         </p>
       </motion.div>

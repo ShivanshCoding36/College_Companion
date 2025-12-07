@@ -28,7 +28,7 @@ export default function AbsenceTimelineCard({ absenceTimeline }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 }}
-      className="bg-bgDark3/50 backdrop-blur-xl rounded-xl border border-white/10 overflow-hidden"
+      className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
     >
       {/* Header */}
       <button
