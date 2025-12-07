@@ -239,10 +239,11 @@ const Profile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900 p-6">
+    <div style={{ background: '#050505' }} className="min-h-screen p-6">
       <div className="max-w-5xl mx-auto space-y-6">
         {/* Header */}
-        <div className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-transparent dark:border-gray-700 p-6">
+        <div className="neon-card p-6">
+          <h2 className="text-2xl font-bold glow-purple mb-6">Profile</h2>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               {/* Avatar */}
@@ -311,7 +312,7 @@ const Profile = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Profile Form */}
-          <div className="lg:col-span-2 bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-transparent dark:border-gray-700 p-6">
+          <div className="lg:col-span-2 neon-card p-6">
             <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
               <User className="w-5 h-5" />
               Profile Information
@@ -325,11 +326,11 @@ const Profile = () => {
                   </label>
                   <input
                     type="text"
-                    name="name"
-                    value={formData.name}
+                    name="branch"
+                    value={formData.branch}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                    placeholder="Your name"
+                    className="neon-input w-full px-4 py-2"
+                    placeholder="Your branch"
                   />
                 </div>
                 
@@ -342,8 +343,8 @@ const Profile = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                    placeholder="Phone number"
+                    className="neon-input w-full px-4 py-2"
+                    placeholder="Your phone number"
                   />
                 </div>
                 
@@ -356,7 +357,7 @@ const Profile = () => {
                     name="department"
                     value={formData.department}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    className="neon-input w-full px-4 py-2"
                     placeholder="e.g., Computer Science"
                   />
                 </div>
@@ -370,7 +371,7 @@ const Profile = () => {
                     name="year"
                     value={formData.year}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    className="neon-input w-full px-4 py-2"
                     placeholder="e.g., 2nd Year"
                   />
                 </div>
@@ -384,7 +385,7 @@ const Profile = () => {
                     name="section"
                     value={formData.section}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    className="neon-input w-full px-4 py-2"
                     placeholder="e.g., A"
                   />
                 </div>
@@ -398,7 +399,7 @@ const Profile = () => {
                     name="registerNumber"
                     value={formData.registerNumber}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    className="neon-input w-full px-4 py-2"
                     placeholder="Registration number"
                   />
                 </div>
@@ -411,7 +412,7 @@ const Profile = () => {
                     name="semester"
                     value={formData.semester}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    className="neon-input w-full px-4 py-2"
                   >
                     {[1, 2, 3, 4, 5, 6, 7, 8].map((sem) => (
                       <option key={sem} value={sem}>
@@ -445,21 +446,21 @@ const Profile = () => {
                         placeholder="Subject Name"
                         value={subject.subjectName}
                         onChange={(e) => handleSubjectChange(index, 'subjectName', e.target.value)}
-                        className="flex-1 px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm"
+                        className="neon-input flex-1 px-3 py-2 text-sm"
                       />
                       <input
                         type="text"
                         placeholder="Staff Name"
                         value={subject.staffName}
                         onChange={(e) => handleSubjectChange(index, 'staffName', e.target.value)}
-                        className="flex-1 px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm"
+                        className="neon-input flex-1 px-3 py-2 text-sm"
                       />
                       <input
                         type="number"
                         placeholder="Credits"
                         value={subject.credits}
                         onChange={(e) => handleSubjectChange(index, 'credits', parseInt(e.target.value) || 0)}
-                        className="w-20 px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm"
+                        className="neon-input w-20 px-3 py-2 text-sm"
                       />
                       <button
                         type="button"
@@ -485,7 +486,7 @@ const Profile = () => {
           </div>
 
           {/* Settings Panel */}
-          <div className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-transparent dark:border-gray-700 p-6">
+          <div className="neon-card p-6">
             <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
               <Settings className="w-5 h-5" />
               Settings
@@ -545,13 +546,13 @@ const Profile = () => {
               
               {/* Language */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-white/80 mb-1">
                   Language
                 </label>
                 <select
                   value={settings.language}
                   onChange={(e) => handleSettingsChange('language', e.target.value)}
-                  className="w-full px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm"
+                  className="neon-input w-full px-3 py-2 text-sm"
                 >
                   <option value="en">English</option>
                   <option value="es">Spanish</option>

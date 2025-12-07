@@ -27,14 +27,14 @@ export default function Sidebar() {
       initial={false}
       animate={{ width: collapsed ? 80 : 260 }}
       transition={{ type: "spring", stiffness: 260, damping: 30 }}
-      className={`flex flex-col h-screen py-4 bg-bgDark2/70 backdrop-blur-xl border-r border-neonPink/40 border-white/5 text-white`}
-      style={{ minWidth: 80 }}
+      className={`flex flex-col h-screen py-4 backdrop-blur-glass border-r border-neonPurple/40 transition-all duration-300 overflow-hidden`}
+      style={{ minWidth: 80, background: 'rgba(13, 13, 13, 0.9)', backdropFilter: 'blur(12px)' }}
     >
-      <div className="px-3">
+      <div className="px-3 flex-shrink-0">
         <SidebarHeader collapsed={collapsed} onToggle={() => setCollapsed((v) => !v)} />
       </div>
 
-      <nav className="mt-6 px-2 flex-1">
+      <nav className="mt-6 px-2 flex-1 overflow-y-auto">
         <ul className="space-y-1">
           {items.map((it) => (
             <li key={it.path}>
@@ -49,7 +49,7 @@ export default function Sidebar() {
         </ul>
       </nav>
 
-      <div className="px-3 mb-4">
+      <div className="px-3 mb-4 flex-shrink-0">
         <SidebarFooter collapsed={collapsed} />
       </div>
     </motion.aside>

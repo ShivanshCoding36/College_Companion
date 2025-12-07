@@ -43,11 +43,11 @@ export default function JoinRoom() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1 }}
-      className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 md:p-8"
+      className="neon-card p-6 md:p-8"
     >
       <div className="flex items-center gap-3 mb-6">
-        <div className="p-3 bg-purple-50 dark:bg-purple-500/10 rounded-xl">
-          <LogIn className="w-6 h-6 text-purple-600 dark:text-purple-500" />
+        <div className="p-3 bg-neonPurple/20 rounded-xl">
+          <LogIn className="w-6 h-6 text-neonPurple" />
         </div>
         <div>
           <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">Join Room</h2>
@@ -68,13 +68,13 @@ export default function JoinRoom() {
             Room ID
           </label>
           <div className="relative">
-            <Hash className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
+            <Hash className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/50" />
             <input
               type="text"
               value={roomId}
               onChange={(e) => setRoomId(e.target.value)}
               placeholder="Enter room ID"
-              className="w-full pl-10 pr-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
+              className="neon-input w-full pl-10 pr-4 py-3"
               disabled={loading}
             />
           </div>

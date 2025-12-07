@@ -33,9 +33,9 @@ export default function Sidebar() {
         onHoverStart={() => setExpanded(true)}
         onHoverEnd={() => setExpanded(false)}
         transition={{ type: "spring", stiffness: 260, damping: 30 }}
-        className="hidden md:flex flex-col h-screen py-4 px-2 bg-white dark:bg-dark-surface border-r border-gray-200 dark:border-dark-border shadow-lg"
+        className="hidden md:flex flex-col h-screen py-4 px-2 border-r border-neonPurple/20 shadow-neon-purple"
+        style={{ background: 'rgba(13, 13, 13, 0.9)', backdropFilter: 'blur(12px)', minWidth: 70 }}
         aria-label="Sidebar"
-        style={{ minWidth: 70 }}
       >
         {/* Logo */}
         <div className="px-2 flex items-center justify-between mb-8">
@@ -115,7 +115,7 @@ export default function Sidebar() {
       </motion.aside>
 
       {/* Mobile Bottom Navigation */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-dark-surface border-t border-gray-200 dark:border-dark-border shadow-lg">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 border-t border-neonPurple/20 shadow-neon-purple" style={{ background: 'rgba(13, 13, 13, 0.95)', backdropFilter: 'blur(12px)' }}>
         <ul className="flex items-center justify-around px-2 py-2">
           {MENU.slice(0, 4).map((m) => (
             <li key={m.path} className="flex-1">

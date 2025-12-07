@@ -11,8 +11,8 @@ export default function SidebarItem({ icon: Icon, label, path, collapsed }) {
     <motion.button
       onClick={() => navigate(path)}
       whileHover={{ scale: 1.02 }}
-      className={`w-full flex items-center gap-3 rounded-md px-3 py-2 transition-colors duration-150 text-sm focus:outline-none
-        ${active ? "bg-neonPink/10 border-l-2 border-neonPink text-neonPink" : "text-white/90 hover:text-neonPink"}`}
+      className={`w-full flex items-center gap-3 rounded-lg px-3 py-2.5 transition-all duration-200 text-sm focus:outline-none
+        ${active ? "bg-neonPurple/10 border-l-2 border-neonPurple text-neonPurple shadow-neon-purple" : "text-white/90 hover:text-neonPurple hover:bg-white/5"}`}
       style={{
         WebkitTapHighlightColor: "transparent",
       }}

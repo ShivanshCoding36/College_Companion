@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Firebase Admin SDK
+backend/firebase-admin-sdk.json
+lmswebapp-synapslogic-firebase-adminsdk-*.json

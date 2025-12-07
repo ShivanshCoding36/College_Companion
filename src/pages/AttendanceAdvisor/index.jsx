@@ -56,7 +56,7 @@ export default function AttendanceAdvisor() {
   };
 
   return (
-    <div className="min-h-screen p-4 md:p-6 bg-gray-50 dark:bg-dark-bg">
+    <div style={{ background: '#050505' }} className="min-h-screen p-4 md:p-6">
       {/* Page Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}

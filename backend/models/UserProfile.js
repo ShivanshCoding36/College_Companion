@@ -50,8 +50,7 @@ const userProfileSchema = new mongoose.Schema({
   firebaseUid: {
     type: String,
     required: true,
-    unique: true,
-    index: true,
+    unique: true
   },
   
   // Basic user info
@@ -112,9 +111,6 @@ const userProfileSchema = new mongoose.Schema({
   timestamps: true,
   collection: 'userprofiles',
 });
-
-// Index for faster lookups
-userProfileSchema.index({ firebaseUid: 1 });
 
 // Method to sanitize profile before sending to client
 userProfileSchema.methods.toSafeObject = function() {

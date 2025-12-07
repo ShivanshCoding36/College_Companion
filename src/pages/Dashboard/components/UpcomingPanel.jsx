@@ -35,10 +35,10 @@ export default function UpcomingPanel() {
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6 }}
-      className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 h-full"
+      className="neon-card h-full"
     >
-      <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-        <Clock className="w-5 h-5 text-blue-600 dark:text-blue-500" />
+      <h2 className="text-xl font-semibold text-white glow-blue mb-6 flex items-center gap-2">
+        <Clock className="w-5 h-5 text-neonBlue" />
         Upcoming Classes
       </h2>
 
@@ -49,7 +49,7 @@ export default function UpcomingPanel() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className="relative bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-500 transition-all duration-300"
+            className="relative bg-white/5 rounded-xl p-4 border border-white/10 hover:border-neonBlue/50 transition-all duration-300 hover:bg-white/10"
           >
             {cls.status === "next" && (
               <div className={`absolute -top-2 -right-2 px-3 py-1 rounded-full text-xs font-semibold ${cls.badgeBg} ${cls.badgeText} border ${cls.badgeBorder}`}>
@@ -59,8 +59,8 @@ export default function UpcomingPanel() {
             
             <div className="flex items-start justify-between">
               <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white text-lg">{cls.subject}</h3>
-                <div className="flex items-center gap-4 mt-2 text-sm text-gray-600 dark:text-gray-400">
+                <h3 className="font-semibold text-white text-lg">{cls.subject}</h3>
+                <div className="flex items-center gap-4 mt-2 text-sm text-white/70">
                   <span className="flex items-center gap-1">
                     <Clock className="w-4 h-4" />
                     {cls.time}
@@ -72,7 +72,7 @@ export default function UpcomingPanel() {
                 </div>
               </div>
               
-              <div className={`w-3 h-3 rounded-full ${cls.dotColor}`} />
+              <div className={`w-3 h-3 rounded-full ${cls.dotColor} shadow-neon-blue`} />
             </div>
           </motion.div>
         ))}

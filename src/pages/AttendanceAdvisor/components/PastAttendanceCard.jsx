@@ -14,7 +14,7 @@ export default function PastAttendanceCard({ attendanceData }) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
+      className="neon-card overflow-hidden"
     >
       {/* Header */}
       <button

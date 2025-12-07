@@ -25,19 +25,23 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="min-h-screen p-4 md:p-6 bg-gray-50 dark:bg-dark-bg">
+    <div className="min-h-screen p-4 md:p-6" style={{ background: '#050505' }}>
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="mb-6 md:mb-8"
       >
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">Dashboard</h1>
-        <p className="text-gray-600 dark:text-gray-400">Welcome back! Here's your academic overview.</p>
+        <h1 className="text-3xl md:text-4xl font-bold text-white glow-purple mb-2">
+          Dashboard
+        </h1>
+        <p className="text-white/70">
+          Welcome back! Here's your academic overview.
+        </p>
       </motion.div>
 
       {/* Stats Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <StatsCard
           icon={GraduationCap}
           title="Attendance"
@@ -73,41 +77,48 @@ export default function Dashboard() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 mb-6 md:mb-8"
+        className="neon-card mb-6 md:mb-8"
       >
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Attendance Trend</h2>
+        <h2 className="text-xl font-semibold text-white glow-blue mb-6">
+          Attendance Trend
+        </h2>
         <ResponsiveContainer width="100%" height={250}>
           <LineChart data={attendanceData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(156, 163, 175, 0.2)" className="dark:opacity-30" />
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.1)" />
             <XAxis 
               dataKey="month" 
-              stroke="currentColor"
-              className="text-gray-600 dark:text-gray-400"
+              stroke="#ffffff"
               style={{ fontSize: '12px' }}
             />
             <YAxis 
-              stroke="currentColor"
-              className="text-gray-600 dark:text-gray-400"
+              stroke="#ffffff"
               style={{ fontSize: '12px' }}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: 'var(--tooltip-bg)',
-                border: '1px solid rgba(156, 163, 175, 0.2)',
+                backgroundColor: '#1a1a24',
+                border: '1px solid rgba(157, 78, 221, 0.3)',
                 borderRadius: '12px',
-                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)'
+                boxShadow: '0 0 20px rgba(157, 78, 221, 0.2)'
               }}
-              labelStyle={{ color: 'var(--tooltip-text)' }}
-              itemStyle={{ color: 'var(--tooltip-text)' }}
+              labelStyle={{ color: '#ffffff' }}
+              itemStyle={{ color: '#ffffff' }}
             />
             <Line
               type="monotone"
               dataKey="attendance"
-              stroke="#3B82F6"
+              stroke="url(#colorGradient)"
               strokeWidth={3}
-              dot={{ fill: '#3B82F6', strokeWidth: 2, r: 5 }}
-              activeDot={{ r: 7, fill: '#3B82F6', stroke: '#fff', strokeWidth: 2 }}
+              dot={{ fill: '#9d4edd', strokeWidth: 2, r: 5 }}
+              activeDot={{ r: 7, fill: '#9d4edd', stroke: '#fff', strokeWidth: 2 }}
             />
+            <defs>
+              <linearGradient id="colorGradient" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="#9d4edd" />
+                <stop offset="50%" stopColor="#4cc9f0" />
+                <stop offset="100%" stopColor="#ff5ecd" />
+              </linearGradient>
+            </defs>
           </LineChart>
         </ResponsiveContainer>
       </motion.div>

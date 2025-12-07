@@ -107,11 +107,19 @@ export default function QuestionGenerator() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">AI Question Generator</h1>
-        <p className="text-gray-600 dark:text-gray-400">Generate exam questions powered by Groq AI</p>
-      </div>
+      {/* Header with Glow */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mb-8"
+      >
+        <h1 className="text-4xl font-bold text-[#3b82f6] drop-shadow-[0_0_10px_rgba(59,130,246,0.6)] dark:drop-shadow-[0_0_12px_rgba(59,130,246,0.9)] mb-2">
+          Question Generator
+        </h1>
+        <p className="text-[#1A1A1A] dark:text-[#E4E4E4]">
+          Generate exam questions powered by Groq AI
+        </p>
+      </motion.div>
 
       {/* Error Alert */}
       {error && (
@@ -141,22 +149,22 @@ export default function QuestionGenerator() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg p-6 border border-gray-200 dark:border-dark-border"
+        className="neon-card p-6"
       >
         <div className="flex items-center gap-4 mb-6">
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg">
             <Sparkles className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Question Generator</h2>
-            <p className="text-sm text-gray-600 dark:text-gray-400">Powered by Groq AI</p>
+            <h2 className="text-xl font-semibold text-white glow-blue">Question Generator</h2>
+            <p className="text-sm text-white/70">Powered by Groq AI</p>
           </div>
         </div>
 
         <div className="space-y-4">
           {/* Syllabus Input */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-[#0A0A0A] dark:text-[#FFFFFF] mb-2">
               Syllabus Content
             </label>
             <textarea
@@ -164,20 +172,20 @@ export default function QuestionGenerator() {
               onChange={(e) => setSyllabus(e.target.value)}
               placeholder="Paste your syllabus here... (e.g., Data Structures: Arrays, Linked Lists, Stacks, Queues, Trees, Binary Search Trees, Graphs, Hash Tables, Sorting and Searching Algorithms...)"
               rows={6}
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl text-sm text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+              className="w-full px-4 py-3 bg-[#F8F9FB] dark:bg-[#0D1117] border border-[#E5E7EB] dark:border-[#2A2F35] rounded-xl text-sm text-[#0A0A0A] dark:text-[#FFFFFF] placeholder:text-[#1A1A1A] dark:placeholder:text-[#E4E4E4] focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
             />
           </div>
 
           {/* Question Type Selector */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-[#0A0A0A] dark:text-[#FFFFFF] mb-2">
                 Question Type
               </label>
               <select
                 value={questionType}
                 onChange={(e) => setQuestionType(e.target.value)}
-                className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all cursor-pointer"
+                className="w-full px-4 py-3 bg-[#F8F9FB] dark:bg-[#0D1117] border border-[#E5E7EB] dark:border-[#2A2F35] rounded-xl text-sm text-[#0A0A0A] dark:text-[#FFFFFF] focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all cursor-pointer"
               >
                 {questionTypes.map((type) => (
                   <option key={type.value} value={type.value}>
@@ -215,17 +223,17 @@ export default function QuestionGenerator() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg p-6 border border-gray-200 dark:border-dark-border"
+          className="neon-card p-6"
         >
           <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
             <div className="flex items-center gap-3">
-              <FileText className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+              <FileText className="w-6 h-6 text-neonBlue" />
+              <h2 className="text-xl font-semibold text-white glow-blue">
                 Generated Questions
               </h2>
             </div>
             <div className="flex items-center gap-3">
-              <span className="text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-lg font-medium">
+              <span className="text-sm text-[#1A1A1A] dark:text-[#E4E4E4] bg-[#F8F9FB] dark:bg-[#0D1117] px-4 py-2 rounded-lg font-medium">
                 {questionTypes.find(t => t.value === questionType)?.label}
               </span>
               <span className="text-sm text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-4 py-2 rounded-lg font-medium">
@@ -241,26 +249,26 @@ export default function QuestionGenerator() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.05 }}
-                className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 hover:shadow-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 group border border-gray-200 dark:border-gray-700"
+                className="bg-[#F8F9FB] dark:bg-[#0D1117] rounded-xl p-4 hover:shadow-md hover:bg-[#F8F9FB] dark:hover:bg-[#0D1117] transition-all duration-200 group border border-[#E5E7EB] dark:border-[#2A2F35]"
               >
                 <div className="flex items-start gap-3">
                   <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold text-sm border border-blue-200 dark:border-blue-800">
                     {index + 1}
                   </div>
                   <div className="flex-1">
-                    <p className="text-gray-900 dark:text-gray-100 text-sm leading-relaxed whitespace-pre-wrap">
+                    <p className="text-[#0A0A0A] dark:text-[#FFFFFF] text-sm leading-relaxed whitespace-pre-wrap">
                       {question}
                     </p>
                   </div>
                   <button
                     onClick={() => copyToClipboard(question, index)}
-                    className="flex-shrink-0 w-8 h-8 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 flex items-center justify-center transition-all duration-200 opacity-0 group-hover:opacity-100"
+                    className="flex-shrink-0 w-8 h-8 rounded-lg bg-[#F8F9FB] dark:bg-[#0D1117] hover:bg-[#E5E7EB] dark:hover:bg-[#2A2F35] flex items-center justify-center transition-all duration-200 opacity-0 group-hover:opacity-100"
                     title="Copy question"
                   >
                     {copiedIndex === index ? (
                       <Check className="w-4 h-4 text-green-600 dark:text-green-400" />
                     ) : (
-                      <Copy className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                      <Copy className="w-4 h-4 text-[#1A1A1A] dark:text-[#E4E4E4]" />
                     )}
                   </button>
                 </div>
@@ -269,7 +277,7 @@ export default function QuestionGenerator() {
           </div>
 
           {/* Action Buttons */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-4 border-t border-[#E5E7EB] dark:border-[#2A2F35]">
             <button 
               onClick={handleSaveAsNotes}
               disabled={isSaving}
@@ -288,7 +296,7 @@ export default function QuestionGenerator() {
               )}
             </button>
             <button 
-              className="px-6 py-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl text-gray-900 dark:text-white text-sm font-semibold transition-all duration-200 border border-gray-300 dark:border-gray-600"
+              className="px-6 py-3 bg-[#F8F9FB] dark:bg-[#0D1117] hover:bg-[#E5E7EB] dark:hover:bg-[#111418] rounded-xl text-[#0A0A0A] dark:text-[#FFFFFF] text-sm font-semibold transition-all duration-200 border border-[#E5E7EB] dark:border-[#2A2F35]"
             >
               Export as PDF
             </button>
@@ -298,12 +306,12 @@ export default function QuestionGenerator() {
 
       {/* Empty State */}
       {questions.length === 0 && !isGenerating && (
-        <div className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg p-12 text-center border border-gray-200 dark:border-dark-border">
+        <div className="bg-white dark:bg-[#111418] rounded-2xl shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:shadow-none p-12 text-center border border-[#E5E7EB] dark:border-[#2A2F35] transition-all duration-300">
           <Sparkles className="w-16 h-16 text-gray-300 dark:text-gray-700 mx-auto mb-4" />
-          <p className="text-gray-600 dark:text-gray-400 text-base mb-2 font-medium">
+          <p className="text-[#1A1A1A] dark:text-[#E4E4E4] text-base mb-2 font-medium">
             Ready to generate questions
           </p>
-          <p className="text-gray-500 dark:text-gray-500 text-sm">
+          <p className="text-[#1A1A1A] dark:text-[#E4E4E4] text-sm">
             Enter your syllabus content and click "Generate Questions" to get started
           </p>
         </div>

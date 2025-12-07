@@ -138,19 +138,19 @@ export default function Login() {
         transition={{ duration: 0.5 }}
         className="relative w-full max-w-md"
       >
-        <div className="bg-white/90 dark:bg-dark-surface/90 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700 p-8 shadow-2xl">
+        <div className="neon-card p-8">
           {/* Header */}
           <div className="text-center mb-8">
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-              className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg"
+              className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-neonPurple to-neonBlue flex items-center justify-center shadow-neon-purple"
             >
               <Lock className="w-8 h-8 text-white" />
             </motion.div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Welcome Back</h1>
-            <p className="text-gray-600 dark:text-gray-400 text-sm">Sign in to continue your learning journey</p>
+            <h1 className="text-3xl font-bold text-white glow-purple mb-2">Welcome Back</h1>
+            <p className="text-white/70 text-sm">Sign in to continue your learning journey</p>
           </div>
 
           {/* Error Message */}
@@ -171,14 +171,14 @@ export default function Login() {
             <div>
               <label className="text-sm text-gray-700 dark:text-gray-300 mb-2 block font-medium">Email</label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/50" />
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="your.email@college.edu"
-                  className="w-full pl-11 pr-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-blue-500 dark:focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-colors"
+                  className="neon-input w-full pl-11 pr-4 py-3"
                 />
               </div>
             </div>
@@ -187,14 +187,14 @@ export default function Login() {
             <div>
               <label className="text-sm text-gray-700 dark:text-gray-300 mb-2 block font-medium">Password</label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/50" />
                 <input
                   type="password"
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="Enter your password"
-                  className="w-full pl-11 pr-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-blue-500 dark:focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-colors"
+                  className="neon-input w-full pl-11 pr-4 py-3"
                 />
               </div>
             </div>
@@ -231,7 +231,7 @@ export default function Login() {
             whileTap={{ scale: loading ? 1 : 0.98 }}
             onClick={handleGoogleSignIn}
             disabled={loading}
-            className="w-full bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-3 disabled:cursor-not-allowed disabled:opacity-50 shadow-sm"
+            className="w-full bg-white/10 hover:bg-white/15 border border-white/20 text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-3 disabled:cursor-not-allowed disabled:opacity-50"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path

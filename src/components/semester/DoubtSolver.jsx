@@ -101,7 +101,7 @@ export default function DoubtSolver() {
             }`}>
               {hasContext ? "✓ Syllabus Context Loaded" : "⚠ Syllabus Context Not Loaded"}
             </h3>
-            <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
+            <p className="text-sm text-[#1A1A1A] dark:text-[#E4E4E4] mb-4">
               {hasContext
                 ? "I have your syllabus context and can provide more accurate, contextual answers."
                 : "Upload your syllabus to get context-aware, accurate responses to your doubts."}
@@ -114,7 +114,7 @@ export default function DoubtSolver() {
                   onChange={(e) => setSyllabusContext(e.target.value)}
                   placeholder="Paste your syllabus here for better context-aware responses..."
                   rows={4}
-                  className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all resize-none"
+                  className="w-full px-4 py-3 bg-white dark:bg-[#111418] border border-[#E5E7EB] dark:border-[#2A2F35] rounded-xl text-[#0A0A0A] dark:text-[#FFFFFF] placeholder:text-[#1A1A1A] dark:placeholder:text-[#E4E4E4] focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all resize-none"
                 />
                 <button
                   onClick={handleContextSubmit}
@@ -134,19 +134,19 @@ export default function DoubtSolver() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
+        className="neon-card overflow-hidden"
         style={{ height: "600px" }}
       >
         {/* Chat Header */}
-        <div className="px-6 py-5 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+        <div className="px-6 py-5 border-b border-white/10 bg-black/20">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-purple-500 flex items-center justify-center shadow-md">
                 <Bot className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h3 className="text-gray-900 dark:text-white font-semibold">Concept Doubt Solver</h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400">AI-powered learning assistant</p>
+                <h3 className="text-[#0A0A0A] dark:text-[#FFFFFF] font-semibold">Concept Doubt Solver</h3>
+                <p className="text-xs text-[#1A1A1A] dark:text-[#E4E4E4]">AI-powered learning assistant</p>
               </div>
             </div>
             <motion.div
@@ -166,7 +166,7 @@ export default function DoubtSolver() {
 
         {/* Messages Container */}
         <div
-          className="overflow-y-auto px-6 py-5 space-y-5 bg-gray-50 dark:bg-gray-900/30"
+          className="overflow-y-auto px-6 py-5 space-y-5 bg-[#F8F9FB] dark:bg-[#0D1117]"
           style={{ height: "calc(100% - 150px)" }}
         >
           {messages.map((message, index) => {
@@ -200,7 +200,7 @@ export default function DoubtSolver() {
                     className={`px-5 py-3.5 rounded-2xl shadow-sm ${
                       isUser
                         ? "bg-gradient-to-br from-pink-500 to-purple-500 text-white rounded-tr-sm"
-                        : "bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white rounded-tl-sm"
+                        : "bg-white dark:bg-[#111418] border border-[#E5E7EB] dark:border-[#2A2F35] text-[#0A0A0A] dark:text-[#FFFFFF] rounded-tl-sm"
                     }`}
                   >
                     <p className="text-sm leading-relaxed whitespace-pre-wrap">
@@ -208,7 +208,7 @@ export default function DoubtSolver() {
                     </p>
                   </div>
                   <div
-                    className={`text-xs text-gray-500 dark:text-gray-400 mt-1.5 px-1 ${
+                    className={`text-xs text-[#1A1A1A] dark:text-[#E4E4E4] mt-1.5 px-1 ${
                       isUser ? "text-right" : "text-left"
                     }`}
                   >
@@ -232,7 +232,7 @@ export default function DoubtSolver() {
               <div className="flex-shrink-0 w-10 h-10 rounded-full bg-white dark:bg-gray-800 border-2 border-indigo-200 dark:border-indigo-500/30 flex items-center justify-center shadow-md">
                 <Loader2 className="w-5 h-5 text-indigo-600 dark:text-indigo-400 animate-spin" />
               </div>
-              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 px-5 py-3.5 rounded-2xl rounded-tl-sm shadow-sm">
+              <div className="bg-white dark:bg-[#111418] border border-[#E5E7EB] dark:border-[#2A2F35] px-5 py-3.5 rounded-2xl rounded-tl-sm shadow-sm">
                 <div className="flex gap-2">
                   <motion.div
                     animate={{ scale: [1, 1.2, 1] }}
@@ -258,7 +258,7 @@ export default function DoubtSolver() {
         </div>
 
         {/* Input Area */}
-        <div className="px-5 py-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/50">
+        <div className="px-5 py-4 border-t border-[#E5E7EB] dark:border-[#2A2F35] bg-white dark:bg-[#111418]">
           <form onSubmit={handleSubmit} className="flex gap-3">
             <input
               ref={inputRef}
@@ -266,7 +266,7 @@ export default function DoubtSolver() {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="Ask your doubt here..."
-              className="flex-1 px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+              className="flex-1 px-4 py-3 bg-[#F8F9FB] dark:bg-[#0D1117] border border-[#E5E7EB] dark:border-[#2A2F35] rounded-xl text-[#0A0A0A] dark:text-[#FFFFFF] placeholder:text-[#1A1A1A] dark:placeholder:text-[#E4E4E4] focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
             />
             <button
               type="submit"

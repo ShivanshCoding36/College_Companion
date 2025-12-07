@@ -1,0 +1,153 @@
+import User from '../models/User.js';
+
+/**
+ * POST /api/users/create
+ * Create new user document
+ */
+export const createUser = async (req, res) => {
+  try {
+    const { uid, email, name } = req.user;
+    
+    // Check if user already exists
+    const existingUser = await User.findById(uid);
+    if (existingUser) {
+      return res.json({
+        success: true,
+        message: 'User already exists',
+        user: existingUser
+      });
+    }
+
+    // Create new user with uid as _id
+    const newUser = new User({
+      _id: uid,
+      profile: {
+        name: name || '',
+        email: email
+      }
+    });
+
+    await newUser.save();
+
+    res.json({
+      success: true,
+      message: 'User created successfully',
+      user: newUser
+    });
+  } catch (error) {
+    console.error('❌ Create user error:', error.message);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to create user',
+      code: 500
+    });
+  }
+};
+
+/**
+ * GET /api/users/:uid
+ * Get user document
+ */
+export const getUser = async (req, res) => {
+  try {
+    const { uid } = req.params;
+
+    const user = await User.findById(uid);
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found',
+        code: 404
+      });
+    }
+
+    res.json({
+      success: true,
+      user
+    });
+  } catch (error) {
+    console.error('❌ Get user error:', error.message);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to fetch user',
+      code: 500
+    });
+  }
+};
+
+/**
+ * PUT /api/users/:uid/updateSection
+ * Update a specific section of user data
+ * Body: { section: "notes"|"essentials"|..., data: {} }
+ */
+export const updateSection = async (req, res) => {
+  try {
+    const { uid } = req.params;
+    const { section, data } = req.body;
+
+    const validSections = [
+      'profile',
+      'settings',
+      'savedChats',
+      'notes',
+      'questionHistory',
+      'survivalPlans',
+      'essentials',
+      'revisionPlans',
+      'attendanceQueries'
+    ];
+
+    if (!validSections.includes(section)) {
+      return res.status(400).json({
+        success: false,
+        error: `Invalid section. Must be one of: ${validSections.join(', ')}`,
+        code: 400
+      });
+    }
+
+    const user = await User.findById(uid);
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found',
+        code: 404
+      });
+    }
+
+    // Handle different section types
+    if (Array.isArray(user[section])) {
+      // For arrays, push new data
+      user[section].push(data);
+    } else if (typeof user[section] === 'object') {
+      // For objects, merge data
+      user[section] = { ...user[section], ...data };
+    } else {
+      // Direct assignment for primitive types
+      user[section] = data;
+    }
+
+    user.updatedAt = new Date();
+    await user.save();
+
+    res.json({
+      success: true,
+      message: `Section '${section}' updated successfully`,
+      user
+    });
+  } catch (error) {
+    console.error('❌ Update section error:', error.message);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to update section',
+      code: 500
+    });
+  }
+};
+
+export default {
+  createUser,
+  getUser,
+  updateSection
+};

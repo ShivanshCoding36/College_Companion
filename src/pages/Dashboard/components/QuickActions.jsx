@@ -35,9 +35,9 @@ export default function QuickActions() {
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6 }}
-      className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 h-full"
+      className="neon-card h-full"
     >
-      <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Quick Actions</h2>
+      <h2 className="text-xl font-semibold text-white glow-purple mb-6">Quick Actions</h2>
 
       <div className="space-y-4">
         {actions.map((action, index) => (
@@ -48,7 +48,7 @@ export default function QuickActions() {
             transition={{ delay: index * 0.1 }}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className={`w-full bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 border border-gray-200 dark:border-gray-700 ${action.hoverBorder} transition-all duration-300 text-left group`}
+            className={`w-full bg-white/5 rounded-xl p-4 border border-white/10 ${action.hoverBorder} transition-all duration-300 text-left group hover:bg-white/10`}
           >
             <div className="flex items-center gap-4">
               <div className={`p-3 rounded-xl transition-all duration-300 ${action.bgColor}`}>
@@ -56,10 +56,10 @@ export default function QuickActions() {
               </div>
               
               <div className="flex-1">
-                <h3 className="font-semibold text-gray-900 dark:text-white text-base">
+                <h3 className="font-semibold text-white text-base">
                   {action.label}
                 </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{action.description}</p>
+                <p className="text-sm text-white/70 mt-1">{action.description}</p>
               </div>
             </div>
           </motion.button>

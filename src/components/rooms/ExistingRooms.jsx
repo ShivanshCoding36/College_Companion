@@ -25,11 +25,11 @@ export default function ExistingRooms() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 md:p-8"
+        className="neon-card p-6 md:p-8"
       >
         <div className="flex items-center justify-center gap-3 py-8">
-          <Loader2 className="w-6 h-6 text-blue-600 dark:text-blue-500 animate-spin" />
-          <p className="text-gray-600 dark:text-gray-400">Loading your rooms...</p>
+          <Loader2 className="w-6 h-6 text-neonBlue animate-spin" />
+          <p className="text-white/70">Loading your rooms...</p>
         </div>
       </motion.div>
     );
@@ -40,12 +40,12 @@ export default function ExistingRooms() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 }}
-      className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 md:p-8"
+      className="neon-card p-6 md:p-8"
     >
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <div className="p-3 bg-green-50 dark:bg-green-500/10 rounded-xl">
-            <Clock className="w-6 h-6 text-green-600 dark:text-green-500" />
+          <div className="p-3 bg-neonBlue/20 rounded-xl">
+            <Clock className="w-6 h-6 text-neonBlue" />
           </div>
           <div>
             <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">Your Active Rooms</h2>

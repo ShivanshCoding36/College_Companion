@@ -1,40 +1,38 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-export default function StatsCard({ icon: Icon, title, value, progress, color = "#3B82F6" }) {
+export default function StatsCard({ icon: Icon, title, value, progress, color = "#9d4edd" }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="relative bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
+      className="neon-card hover:scale-[1.02]"
     >
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div 
-            className="p-3 rounded-xl bg-blue-50 dark:bg-blue-500/10"
-          >
-            <Icon className="w-6 h-6 text-blue-600 dark:text-blue-500" />
+          <div className="p-3 rounded-xl bg-neonPurple/10 border border-neonPurple/30">
+            <Icon className="w-6 h-6 text-neonPurple" />
           </div>
           <div>
-            <p className="text-sm text-gray-600 dark:text-gray-400">{title}</p>
-            <p className="text-3xl font-bold text-gray-900 dark:text-white">{value}</p>
+            <p className="text-sm font-medium text-white/70">{title}</p>
+            <p className="text-3xl font-bold text-white glow-purple">{value}</p>
           </div>
         </div>
       </div>
       
       {progress !== undefined && (
         <div className="mt-4">
-          <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400 mb-2">
+          <div className="flex items-center justify-between text-xs font-medium text-white/70 mb-2">
             <span>Progress</span>
             <span>{progress}%</span>
           </div>
-          <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+          <div className="h-2 bg-white/10 rounded-full overflow-hidden">
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-600"
+              className="h-full rounded-full bg-primary-gradient"
             />
           </div>
         </div>

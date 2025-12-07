@@ -141,17 +141,17 @@ export default function RoomPage() {
   }
 
   return (
-    <div className="min-h-screen p-4 md:p-6 bg-gray-50 dark:bg-dark-bg">
+    <div style={{ background: '#050505' }} className="min-h-screen p-4 md:p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-4 md:p-6 mb-6"
+          className="neon-card p-4 md:p-6 mb-6"
         >
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">Study Room</h1>
+              <h1 className="text-2xl md:text-3xl font-bold text-white glow-purple mb-2">Study Room</h1>
               <div className="flex items-center gap-3">
                 <code className="px-3 md:px-4 py-2 bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded-xl font-mono text-xs md:text-sm font-bold">
                   {roomId.substring(0, 12)}...
@@ -200,11 +200,11 @@ export default function RoomPage() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
-            className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-4 md:p-6 lg:col-span-1"
+            className="neon-card p-4 md:p-6 lg:col-span-1"
           >
             <div className="flex items-center gap-2 mb-4">
-              <Users className="w-5 h-5 text-blue-600 dark:text-blue-500" />
-              <h2 className="text-lg md:text-xl font-bold text-gray-900 dark:text-white">
+              <Users className="w-5 h-5 text-neonBlue" />
+              <h2 className="text-lg md:text-xl font-bold text-white glow-blue">
                 Members ({members.length}/5)
               </h2>
             </div>
@@ -237,10 +237,10 @@ export default function RoomPage() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-4 md:p-6 lg:col-span-2"
+            className="neon-card p-4 md:p-6 lg:col-span-2"
           >
-            <h2 className="text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-4">Study Area</h2>
-            <div className="text-center py-12 text-gray-600 dark:text-gray-400">
+            <h2 className="text-lg md:text-xl font-bold text-white glow-pink mb-4">Study Area</h2>
+            <div className="text-center py-12 text-white/70">
               <p className="text-lg mb-2">Collaborate with your team</p>
               <p className="text-sm">Share notes, discuss topics, and study together</p>
             </div>

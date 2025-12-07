@@ -88,9 +88,131 @@ export const generateJSONCompletion = async (systemPrompt, userPrompt, options =
   }
 };
 
+/**
+ * Generate AI response for general queries
+ */
+export const generateGroqResponse = async (userPrompt, contextType = 'general', options = {}) => {
+  const systemPrompts = {
+    'attendance-advisor': 'You are an intelligent AI assistant specializing in attendance management, academic planning, and student advisory. Provide clear, actionable, and accurate responses.',
+    'question-generator': 'You are an expert question generator for educational purposes. Generate relevant, challenging questions.',
+    'survival-plan': 'You are an academic survival plan assistant. Help students plan their semester effectively.',
+    'essentials': 'You are an essentials extractor. Extract key points and important information from content.',
+    'revision': 'You are a revision strategy expert. Help students create effective revision plans.',
+    'doubt-solver': 'You are a doubt solver. Provide clear explanations to student questions.',
+    'general': 'You are a helpful AI assistant. Provide accurate and useful responses.'
+  };
+
+  const systemPrompt = systemPrompts[contextType] || systemPrompts.general;
+  return await generateCompletion(systemPrompt, userPrompt, options);
+};
+
+/**
+ * Generate questions from syllabus
+ */
+export const generateQuestions = async (syllabus, questionType) => {
+  const systemPrompt = 'You are an expert question generator. Create educational questions based on syllabus content. Return ONLY valid JSON.';
+  const userPrompt = `Generate ${questionType} questions for this syllabus. Return JSON in this format:
+
+{
+  "questions": [
+    {
+      "question": "Question text",
+      "type": "${questionType}",
+      "difficulty": "easy|medium|hard",
+      "topic": "Topic name"
+    }
+  ]
+}
+
+Syllabus: ${syllabus}`;
+
+  const response = await generateCompletion(systemPrompt, userPrompt, { json: true });
+  
+  let jsonText = response.trim();
+  if (jsonText.startsWith('```json')) {
+    jsonText = jsonText.replace(/^```json\n/, '').replace(/\n```$/, '');
+  } else if (jsonText.startsWith('```')) {
+    jsonText = jsonText.replace(/^```\n/, '').replace(/\n```$/, '');
+  }
+  
+  return JSON.parse(jsonText);
+};
+
+/**
+ * Generate survival plan
+ */
+export const generateSurvivalPlan = async (params) => {
+  const { skills, stressLevel, timeAvailable, examDates, goals } = params;
+  
+  const systemPrompt = 'You are an academic planning expert. Create comprehensive semester survival plans. Return ONLY valid JSON.';
+  const userPrompt = `Create a semester survival plan with these parameters:
+
+Skills: ${skills}
+Stress Level: ${stressLevel}
+Time Available: ${timeAvailable}
+Exam Dates: ${examDates}
+Goals: ${goals}
+
+Return JSON in this format:
+
+{
+  "weeklyPlan": [
+    {
+      "week": 1,
+      "focus": "Main focus area",
+      "tasks": ["task1", "task2"],
+      "goals": "Weekly goals"
+    }
+  ],
+  "studySchedule": {
+    "morning": "Activities",
+    "afternoon": "Activities",
+    "evening": "Activities"
+  },
+  "stressManagement": ["tip1", "tip2"],
+  "examPreparation": {
+    "strategy": "Exam strategy",
+    "timeline": "Preparation timeline"
+  }
+}`;
+
+  const response = await generateCompletion(systemPrompt, userPrompt, { json: true });
+  
+  let jsonText = response.trim();
+  if (jsonText.startsWith('```json')) {
+    jsonText = jsonText.replace(/^```json\n/, '').replace(/\n```$/, '');
+  } else if (jsonText.startsWith('```')) {
+    jsonText = jsonText.replace(/^```\n/, '').replace(/\n```$/, '');
+  }
+  
+  return JSON.parse(jsonText);
+};
+
+/**
+ * Attendance advisor
+ */
+export const attendanceAdvisor = async (question, attendanceData = {}) => {
+  const systemPrompt = 'You are an attendance management advisor. Provide structured attendance advice and calculations.';
+  const userPrompt = `Analyze this attendance situation and provide advice.
+
+${Object.keys(attendanceData).length > 0 ? `Current Attendance Data: ${JSON.stringify(attendanceData)}\n\n` : ''}Question: ${question}
+
+Provide actionable advice including:
+- Current attendance percentage (if data provided)
+- Classes needed to reach target
+- Risk assessment
+- Recommendations`;
+
+  return await generateCompletion(systemPrompt, userPrompt);
+};
+
 export default {
   initializeGroqClient,
   getGroqClient,
   generateCompletion,
   generateJSONCompletion,
+  generateGroqResponse,
+  generateQuestions,
+  generateSurvivalPlan,
+  attendanceAdvisor,
 };

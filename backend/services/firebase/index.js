@@ -41,15 +41,33 @@ export const initializeFirebase = () => {
       return { app: admin.app(), db: firestoreDb, auth: admin.auth() };
     }
 
-    const credentialPath = resolveServiceAccountPath();
-    const serviceAccount = JSON.parse(readFileSync(credentialPath, 'utf8'));
+    // Try to use service account file first
+    try {
+      const credentialPath = resolveServiceAccountPath();
+      const serviceAccount = JSON.parse(readFileSync(credentialPath, 'utf8'));
 
-    admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount)
-    });
+      admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount)
+      });
 
-    firestoreDb = admin.firestore();
-    console.log(`✅ Firebase initialized using ${credentialPath}`);
+      firestoreDb = admin.firestore();
+      console.log(`✅ Firebase initialized using ${credentialPath}`);
+    } catch (fileError) {
+      // Fallback to environment variables
+      console.log('⚠️  Service account file not found, trying environment variables...');
+      
+      if (!process.env.FIREBASE_PROJECT_ID) {
+        throw new Error('Firebase credentials not configured. Set FIREBASE_PROJECT_ID or provide service account file.');
+      }
+
+      admin.initializeApp({
+        credential: admin.credential.applicationDefault(),
+        projectId: process.env.FIREBASE_PROJECT_ID
+      });
+
+      firestoreDb = admin.firestore();
+      console.log('✅ Firebase initialized using environment variables');
+    }
 
     return { app: admin.app(), db: firestoreDb, auth: admin.auth() };
   } catch (error) {

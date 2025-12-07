@@ -2,134 +2,188 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --radius: 0.5rem;
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Force dark background globally */
+html,
+body {
+  background: #050505 !important;
+  color: #fafafa;
+  min-height: 100%;
 }
 
+/* Smooth transition when switching modes */
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  overflow-x: hidden;
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html {
+    background: #050505 !important;
+    color-scheme: dark;
+  }
+  
+  body {
+    @apply text-white font-body antialiased;
+    background: #050505 !important;
+    min-width: 320px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color-scheme: dark;
+  }
+  
+  #root {
+    background: #050505 !important;
+    min-height: 100vh;
+  }
 }
 
-/* Light Mode Defaults */
-body {
-  @apply bg-[#F7F8FA] text-[#111827];
+@layer components {
+  /* Neon Text */
+  .neon-text {
+    @apply text-transparent bg-clip-text bg-primary-gradient;
+    text-shadow: 0 0 20px rgba(157, 78, 221, 0.6), 0 0 30px rgba(76, 201, 240, 0.4);
+  }
+  
+  /* Neon Border */
+  .neon-border {
+    @apply border border-neonPurple;
+    box-shadow: 0 0 15px rgba(157, 78, 221, 0.5), inset 0 0 15px rgba(157, 78, 221, 0.2);
+  }
+  
+  .neon-border-blue {
+    @apply border border-neonBlue;
+    box-shadow: 0 0 15px rgba(76, 201, 240, 0.5), inset 0 0 15px rgba(76, 201, 240, 0.2);
+  }
+  
+  .neon-border-pink {
+    @apply border border-neonPink;
+    box-shadow: 0 0 15px rgba(255, 94, 205, 0.5), inset 0 0 15px rgba(255, 94, 205, 0.2);
+  }
+  
+  /* Neon Card */
+  .neon-card {
+    background: rgba(13, 13, 13, 0.7);
+    backdrop-filter: blur(12px);
+    @apply rounded-neon p-6 border border-glassBorder;
+    box-shadow: 0 0 20px rgba(157, 78, 221, 0.15), 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .neon-card:hover {
+    @apply border-neonPurple/50;
+    box-shadow: 0 0 25px rgba(157, 78, 221, 0.3), 0 8px 32px 0 rgba(31, 38, 135, 0.3);
+    transform: translateY(-2px);
+  }
+  
+  /* Glass Card */
+  .glass-card {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+    @apply rounded-neon-lg p-6 border border-white/10;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  }
+  
+  /* Neon Button */
+  .neon-button {
+    @apply px-6 py-3 rounded-neon font-semibold text-white bg-primary-gradient;
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-neon-glow;
+    @apply active:scale-95;
+  }
+  
+  .neon-button-outline {
+    @apply px-6 py-3 rounded-neon font-semibold text-white bg-transparent border-2 border-neonPurple;
+    @apply transition-all duration-300 hover:bg-neonPurple/20 hover:shadow-neon-purple;
+    @apply active:scale-95;
+  }
+  
+  /* Neon Input */
+  .neon-input {
+    @apply w-full px-4 py-3 border border-glassBorder rounded-neon;
+    background: rgba(13, 13, 13, 0.5);
+    @apply text-white placeholder:text-white/40;
+    @apply focus:outline-none focus:border-neonPurple focus:shadow-neon-purple;
+    @apply transition-all duration-300;
+  }
+  
+  .neon-input:focus {
+    background: rgba(13, 13, 13, 0.7);
+  }
+  
+  /* Glow Effects */
+  .glow-purple {
+    text-shadow: 0 0 10px rgba(157, 78, 221, 0.8), 0 0 20px rgba(157, 78, 221, 0.5);
+  }
+  
+  .glow-blue {
+    text-shadow: 0 0 10px rgba(76, 201, 240, 0.8), 0 0 20px rgba(76, 201, 240, 0.5);
+  }
+  
+  .glow-pink {
+    text-shadow: 0 0 10px rgba(255, 94, 205, 0.8), 0 0 20px rgba(255, 94, 205, 0.5);
+  }
 }
 
-/* Dark Mode */
-body.dark {
-  @apply bg-[#0D1117] text-[#F9FAFB];
+@layer utilities {
+  /* Scrollbar Styles */
+  .scrollbar-neon::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .scrollbar-neon::-webkit-scrollbar-track {
+    background: #0d0d0d;
+  }
+  
+  .scrollbar-neon::-webkit-scrollbar-thumb {
+    @apply bg-neonPurple/50 rounded-full;
+  }
+  
+  .scrollbar-neon::-webkit-scrollbar-thumb:hover {
+    @apply bg-neonPurple;
+  }
+  
+  /* Transitions */
+  .transition-neon {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 }
 
-/* Scrollbar Styles */
+/* Global Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100 dark:bg-gray-800;
+  background: #050505;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+  background: linear-gradient(135deg, #9d4edd, #4cc9f0);
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-400 dark:bg-gray-500;
+  background: linear-gradient(135deg, #b569f5, #6dd5f6);
+}
+
+/* Selection */
+::selection {
+  background: rgba(157, 78, 221, 0.3);
+  color: white;
 }
 
 /* Focus Styles */
-*:focus-visible {
-  @apply outline-none ring-2 ring-blue-500 ring-offset-2 dark:ring-offset-gray-900;
-}
-
-/* Smooth Transitions */
-* {
-  @apply transition-colors duration-200;
-}
-
-/* Custom Utilities */
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-  
-  .animate-fade-in {
-    animation: fadeIn 0.2s ease-in-out;
-  }
-  
-  .animate-slide-up {
-    animation: slideUp 0.3s ease-out;
-  }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { 
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to { 
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
-/* Custom Scrollbar Styles */
-div::-webkit-scrollbar {
-  width: 6px;
-}
-
-div::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-}
-
-div::-webkit-scrollbar-thumb {
-  background: rgba(138, 43, 226, 0.3);
-  border-radius: 10px;
-}
-
-div::-webkit-scrollbar-thumb:hover {
-  background: rgba(138, 43, 226, 0.5);
+:focus-visible {
+  outline: 2px solid #9d4edd;
+  outline-offset: 2px;
 }

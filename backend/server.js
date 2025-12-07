@@ -7,16 +7,16 @@ import connectDB from './config/db.js';
 import { initializeFirebaseAdmin } from './config/firebaseAdmin.js';
 import { initializeGroqClient } from './services/groqService.js';
 
-// Import routes
-import questionRoutes from './routes/question.js';
-import survivalRoutes from './routes/survival.js';
-import essentialsRoutes from './routes/essentials.js';
-import revisionRoutes from './routes/revision.js';
-import notesRoutes from './routes/notes.js';
-import doubtRoutes from './routes/doubt.js';
-import attendanceRoutes from './routes/attendance.js';
-import usersRoutes from './routes/users.js';
-import profileRoutes from './routes/profile.js';
+// Import NEW user-scoped routes
+import profileRoutes from './routes/profileRoutes.js';
+import survivalRoutes from './routes/survivalRoutes.js';
+import notesRoutes from './routes/notesRoutes.js';
+import questionsRoutes from './routes/questionsRoutes.js';
+import attendanceRoutes from './routes/attendanceRoutes.js';
+
+// Import legacy routes (kept for backwards compatibility)
+import apiRoutes from './routes/apiRoutes.js';
+import aiAttendanceRoutes from './routes/aiAttendance.js';
 
 // Load environment variables
 dotenv.config();
@@ -33,8 +33,13 @@ console.log('🚀 Initializing Backend Services...\n');
 
 try {
   // Initialize MongoDB
-  await connectDB();
-  console.log('');
+  try {
+    await connectDB();
+    console.log('');
+  } catch (dbError) {
+    console.error('❌ MongoDB connection failed:', dbError.message);
+    console.warn('⚠️  Continuing without MongoDB. Database features will not work.');
+  }
 
   // Initialize Firebase Admin SDK
   try {
@@ -49,8 +54,8 @@ try {
   initializeGroqClient();
   console.log('');
 } catch (error) {
-  console.error('❌ Service initialization failed:', error.message);
-  process.exit(1);
+  console.error('❌ Critical service initialization failed:', error.message);
+  console.warn('⚠️  Some features may not work properly.');
 }
 
 // Middleware
@@ -100,16 +105,16 @@ app.get('/health', (req, res) => {
   });
 });
 
-// API Routes - Mount all semester module routes
-app.use('/api/questions', questionRoutes);
-app.use('/api/survival', survivalRoutes);
-app.use('/api/essentials', essentialsRoutes);
-app.use('/api/revision', revisionRoutes);
-app.use('/api/notes', notesRoutes);
-app.use('/api/doubt', doubtRoutes);
-app.use('/api/attendance', attendanceRoutes);
-app.use('/api/users', usersRoutes);
+// NEW USER-SCOPED API ROUTES (All require Firebase authentication)
 app.use('/api/profile', profileRoutes);
+app.use('/api/survival', survivalRoutes);
+app.use('/api/notes', notesRoutes);
+app.use('/api/questions', questionsRoutes);
+app.use('/api/attendance', attendanceRoutes);
+
+// Legacy routes (kept for backwards compatibility)
+app.use('/api', apiRoutes);
+app.use('/api/ai-attendance', aiAttendanceRoutes);
 
 // Catch-all Handler
 app.use((req, res) => {
@@ -117,31 +122,41 @@ app.use((req, res) => {
     success: false,
     error: 'Endpoint not found',
     path: req.path,
-    availableEndpoints: [
-      'POST /api/questions/generate',
-      'GET /api/questions/history',
-      'POST /api/survival/generate',
-      'GET /api/survival/history',
-      'POST /api/essentials/extract',
-      'GET /api/essentials/history',
-      'POST /api/revision/generate',
-      'GET /api/revision/history',
-      'POST /api/notes',
-      'GET /api/notes',
-      'PUT /api/notes/:id',
-      'DELETE /api/notes/:id',
-      'POST /api/doubt/ask',
-      'GET /api/doubt/history',
-      'POST /api/attendance/query',
-      'GET /api/attendance/history',
-      'GET /api/users/:id',
-      'POST /api/users',
-      'GET /api/profile/me',
-      'PUT /api/profile/update',
-      'PUT /api/profile/settings',
-      'POST /api/profile/avatar',
-      'DELETE /api/profile/delete',
-    ],
+    availableEndpoints: {
+      profile: [
+        'GET /api/profile - Get user profile',
+        'PUT /api/profile/update - Update profile',
+        'GET /api/profile/full - Get full user data'
+      ],
+      survivalKit: [
+        'POST /api/survival/essentials - Add essential',
+        'GET /api/survival/essentials - Get all essentials',
+        'DELETE /api/survival/essentials/:id - Delete essential',
+        'POST /api/survival/revision-strategies - Add revision strategy',
+        'GET /api/survival/revision-strategies - Get all strategies',
+        'POST /api/survival/plans - Add survival plan',
+        'GET /api/survival/plans - Get all plans',
+        'DELETE /api/survival/plans/:id - Delete plan'
+      ],
+      notes: [
+        'POST /api/notes - Add note',
+        'GET /api/notes - Get all notes',
+        'GET /api/notes/:id - Get specific note',
+        'PUT /api/notes/:id - Update note',
+        'DELETE /api/notes/:id - Delete note'
+      ],
+      questions: [
+        'POST /api/questions - Save question',
+        'GET /api/questions - Get all questions',
+        'DELETE /api/questions/:id - Delete question'
+      ],
+      attendance: [
+        'POST /api/attendance - Add attendance record',
+        'GET /api/attendance - Get all records',
+        'GET /api/attendance/stats - Get statistics',
+        'DELETE /api/attendance/:id - Delete record'
+      ]
+    }
   });
 });
 
@@ -186,15 +201,14 @@ const server = app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
   console.log(`📍 Health check: http://localhost:${PORT}/health`);
   console.log(`📍 API base: http://localhost:${PORT}/api\n`);
-  console.log('Available modules:');
-  console.log('  - Question Generator: /api/questions');
-  console.log('  - Survival Plan: /api/survival');
-  console.log('  - Semester Essentials: /api/essentials');
-  console.log('  - Revision Strategy: /api/revision');
-  console.log('  - Notes Repository: /api/notes');
-  console.log('  - Doubt Solver: /api/doubt');
-  console.log('  - Attendance Advisor: /api/attendance');
-  console.log('  - User Profile: /api/profile\n');
+  console.log('🔒 USER-SCOPED API (Firebase Auth Required):');
+  console.log('  📋 Profile: /api/profile');
+  console.log('  🛡️  Survival Kit: /api/survival');
+  console.log('  📝 Notes Repository: /api/notes');
+  console.log('  ❓ Questions Generator: /api/questions');
+  console.log('  📊 Attendance Advisor: /api/attendance\n');
+  console.log('✨ All user data persists across logout/login');
+  console.log('✨ Each user has isolated dataset in MongoDB\n');
 });
 
 // Graceful shutdown

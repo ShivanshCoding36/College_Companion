@@ -21,17 +21,21 @@ function App() {
         <AuthProvider>
           <RoomProvider>
             <Routes>
+              {/* Redirect root to login */}
+              <Route path="/" element={<Navigate to="/login" replace />} />
+              
               {/* Public Routes */}
-              <Route path="/" element={<Navigate to="/dashboard" replace />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              
+              {/* Onboarding - Protected */}
               <Route path="/onboarding" element={
                 <PrivateRoute>
                   <Onboarding />
                 </PrivateRoute>
               } />
 
-              {/* Protected Routes */}
+              {/* Protected Routes - All require authentication */}
               <Route element={
                 <PrivateRoute>
                   <AppLayout />
@@ -44,6 +48,9 @@ function App() {
                 <Route path="/study-arena/room/:roomCode" element={<RoomPage />} />
                 <Route path="/profile" element={<Profile />} />
               </Route>
+              
+              {/* Catch all - redirect to login */}
+              <Route path="*" element={<Navigate to="/login" replace />} />
             </Routes>
           </RoomProvider>
         </AuthProvider>

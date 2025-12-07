@@ -6,18 +6,18 @@ export default function SidebarHeader({ collapsed, onToggle }) {
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-3">
         <motion.div
-          className="w-3 h-3 rounded-full bg-neonPink"
+          className="w-3 h-3 rounded-full bg-neonPurple shadow-neon-purple"
           aria-hidden
           animate={{ scale: [1, 1.15, 1], opacity: [1, 0.8, 1] }}
           transition={{ duration: 2.2, repeat: Infinity }}
-          title="neon"
+          title="active"
         />
 
         {!collapsed && (
           <motion.h1
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-lg font-semibold"
+            className="text-lg font-semibold text-white glow-purple"
           >
             College Companion
           </motion.h1>
@@ -26,7 +26,7 @@ export default function SidebarHeader({ collapsed, onToggle }) {
 
       <button
         onClick={onToggle}
-        className="text-white/60 hover:text-white p-1 rounded-md"
+        className="text-white/60 hover:text-neonPurple p-1 rounded-md transition-colors"
         aria-label="toggle sidebar"
       >
         <svg

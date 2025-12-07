@@ -232,4 +232,472 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// ==================== SECTION-SPECIFIC ENDPOINTS ====================
+
+// PUT /api/users/:uid/personalDetails - Update personal details
+router.put('/:uid/personalDetails', async (req, res) => {
+  try {
+    const { uid } = req.params;
+    const user = await User.findOne({ firebaseUID: uid });
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      });
+    }
+    
+    user.personalDetails = { ...user.personalDetails, ...req.body };
+    user.updatedAt = new Date();
+    await user.save();
+    
+    res.json({
+      success: true,
+      personalDetails: user.personalDetails
+    });
+  } catch (error) {
+    console.error('❌ Error updating personal details:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to update personal details',
+      details: error.message
+    });
+  }
+});
+
+// PUT /api/users/:uid/settings - Update user settings
+router.put('/:uid/settings', async (req, res) => {
+  try {
+    const { uid } = req.params;
+    const user = await User.findOne({ firebaseUID: uid });
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      });
+    }
+    
+    user.settings = { ...user.settings, ...req.body };
+    user.updatedAt = new Date();
+    await user.save();
+    
+    res.json({
+      success: true,
+      settings: user.settings
+    });
+  } catch (error) {
+    console.error('❌ Error updating settings:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to update settings',
+      details: error.message
+    });
+  }
+});
+
+// POST /api/users/:uid/attendanceHistory - Add attendance history entry
+router.post('/:uid/attendanceHistory', async (req, res) => {
+  try {
+    const { uid } = req.params;
+    const user = await User.findOne({ firebaseUID: uid });
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      });
+    }
+    
+    user.attendanceAdvisorHistory.push({
+      ...req.body,
+      timestamp: new Date()
+    });
+    user.updatedAt = new Date();
+    await user.save();
+    
+    res.json({
+      success: true,
+      attendanceHistory: user.attendanceAdvisorHistory
+    });
+  } catch (error) {
+    console.error('❌ Error adding attendance history:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to add attendance history',
+      details: error.message
+    });
+  }
+});
+
+// GET /api/users/:uid/attendanceHistory - Get attendance history
+router.get('/:uid/attendanceHistory', async (req, res) => {
+  try {
+    const { uid } = req.params;
+    const user = await User.findOne({ firebaseUID: uid });
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      });
+    }
+    
+    res.json({
+      success: true,
+      attendanceHistory: user.attendanceAdvisorHistory || []
+    });
+  } catch (error) {
+    console.error('❌ Error fetching attendance history:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to fetch attendance history',
+      details: error.message
+    });
+  }
+});
+
+// POST /api/users/:uid/essentialsHistory - Add essentials extractor entry
+router.post('/:uid/essentialsHistory', async (req, res) => {
+  try {
+    const { uid } = req.params;
+    const user = await User.findOne({ firebaseUID: uid });
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      });
+    }
+    
+    user.essentialsExtractorHistory.push({
+      ...req.body,
+      timestamp: new Date()
+    });
+    user.updatedAt = new Date();
+    await user.save();
+    
+    res.json({
+      success: true,
+      essentialsHistory: user.essentialsExtractorHistory
+    });
+  } catch (error) {
+    console.error('❌ Error adding essentials history:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to add essentials history',
+      details: error.message
+    });
+  }
+});
+
+// POST /api/users/:uid/revisionStrategy - Add revision strategy
+router.post('/:uid/revisionStrategy', async (req, res) => {
+  try {
+    const { uid } = req.params;
+    const user = await User.findOne({ firebaseUID: uid });
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      });
+    }
+    
+    user.revisionStrategy.push({
+      ...req.body,
+      timestamp: new Date()
+    });
+    user.updatedAt = new Date();
+    await user.save();
+    
+    res.json({
+      success: true,
+      revisionStrategy: user.revisionStrategy
+    });
+  } catch (error) {
+    console.error('❌ Error adding revision strategy:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to add revision strategy',
+      details: error.message
+    });
+  }
+});
+
+// POST /api/users/:uid/questionHistory - Add question generator entry
+router.post('/:uid/questionHistory', async (req, res) => {
+  try {
+    const { uid } = req.params;
+    const user = await User.findOne({ firebaseUID: uid });
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      });
+    }
+    
+    user.questionGeneratorHistory.push({
+      ...req.body,
+      timestamp: new Date()
+    });
+    user.updatedAt = new Date();
+    await user.save();
+    
+    res.json({
+      success: true,
+      questionHistory: user.questionGeneratorHistory
+    });
+  } catch (error) {
+    console.error('❌ Error adding question history:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to add question history',
+      details: error.message
+    });
+  }
+});
+
+// GET /api/users/:uid/questionHistory - Get question history
+router.get('/:uid/questionHistory', async (req, res) => {
+  try {
+    const { uid } = req.params;
+    const user = await User.findOne({ firebaseUID: uid });
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      });
+    }
+    
+    res.json({
+      success: true,
+      questionHistory: user.questionGeneratorHistory || []
+    });
+  } catch (error) {
+    console.error('❌ Error fetching question history:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to fetch question history',
+      details: error.message
+    });
+  }
+});
+
+// POST /api/users/:uid/notes - Add note to repository
+router.post('/:uid/notes', async (req, res) => {
+  try {
+    const { uid } = req.params;
+    const user = await User.findOne({ firebaseUID: uid });
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      });
+    }
+    
+    user.notesRepository.push({
+      ...req.body,
+      timestamp: new Date()
+    });
+    user.updatedAt = new Date();
+    await user.save();
+    
+    res.json({
+      success: true,
+      notesRepository: user.notesRepository
+    });
+  } catch (error) {
+    console.error('❌ Error adding note:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to add note',
+      details: error.message
+    });
+  }
+});
+
+// GET /api/users/:uid/notes - Get all notes
+router.get('/:uid/notes', async (req, res) => {
+  try {
+    const { uid } = req.params;
+    const user = await User.findOne({ firebaseUID: uid });
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      });
+    }
+    
+    res.json({
+      success: true,
+      notes: user.notesRepository || []
+    });
+  } catch (error) {
+    console.error('❌ Error fetching notes:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to fetch notes',
+      details: error.message
+    });
+  }
+});
+
+// PUT /api/users/:uid/semesterTools - Update semester tools
+router.put('/:uid/semesterTools', async (req, res) => {
+  try {
+    const { uid } = req.params;
+    const user = await User.findOne({ firebaseUID: uid });
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      });
+    }
+    
+    user.semesterTools = { ...user.semesterTools, ...req.body };
+    user.updatedAt = new Date();
+    await user.save();
+    
+    res.json({
+      success: true,
+      semesterTools: user.semesterTools
+    });
+  } catch (error) {
+    console.error('❌ Error updating semester tools:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to update semester tools',
+      details: error.message
+    });
+  }
+});
+
+// GET /api/users/:uid/semesterTools - Get semester tools
+router.get('/:uid/semesterTools', async (req, res) => {
+  try {
+    const { uid } = req.params;
+    const user = await User.findOne({ firebaseUID: uid });
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      });
+    }
+    
+    res.json({
+      success: true,
+      semesterTools: user.semesterTools || { survivalPlans: [], timetables: [], deadlines: [] }
+    });
+  } catch (error) {
+    console.error('❌ Error fetching semester tools:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to fetch semester tools',
+      details: error.message
+    });
+  }
+});
+
+// POST /api/users/:uid/saveChat - Save chat to history
+router.post('/:uid/saveChat', async (req, res) => {
+  try {
+    const { uid } = req.params;
+    const user = await User.findOne({ firebaseUID: uid });
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      });
+    }
+    
+    user.savedChats.push({
+      ...req.body,
+      timestamp: new Date()
+    });
+    user.updatedAt = new Date();
+    await user.save();
+    
+    res.json({
+      success: true,
+      savedChats: user.savedChats
+    });
+  } catch (error) {
+    console.error('❌ Error saving chat:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to save chat',
+      details: error.message
+    });
+  }
+});
+
+// GET /api/users/:uid/savedChats - Get all saved chats
+router.get('/:uid/savedChats', async (req, res) => {
+  try {
+    const { uid } = req.params;
+    const user = await User.findOne({ firebaseUID: uid });
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      });
+    }
+    
+    res.json({
+      success: true,
+      savedChats: user.savedChats || []
+    });
+  } catch (error) {
+    console.error('❌ Error fetching saved chats:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to fetch saved chats',
+      details: error.message
+    });
+  }
+});
+
+// POST /api/users/:uid/doubtHistory - Add doubt solver entry
+router.post('/:uid/doubtHistory', async (req, res) => {
+  try {
+    const { uid } = req.params;
+    const user = await User.findOne({ firebaseUID: uid });
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      });
+    }
+    
+    user.doubtSolverHistory.push({
+      ...req.body,
+      timestamp: new Date()
+    });
+    user.updatedAt = new Date();
+    await user.save();
+    
+    res.json({
+      success: true,
+      doubtHistory: user.doubtSolverHistory
+    });
+  } catch (error) {
+    console.error('❌ Error adding doubt history:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to add doubt history',
+      details: error.message
+    });
+  }
+});
+
 export default router;

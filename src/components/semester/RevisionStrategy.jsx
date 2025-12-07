@@ -142,35 +142,35 @@ export default function RevisionStrategy() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6"
+        className="neon-card p-6"
       >
         <div className="flex items-center gap-4 mb-6">
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-md">
             <Calendar className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white">Revision Strategy Generator</h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Smart revision schedule based on time available</p>
+            <h3 className="text-xl font-bold glow-blue">Revision Strategy Generator</h3>
+            <p className="text-sm text-[#1A1A1A] dark:text-[#E4E4E4]">Smart revision schedule based on time available</p>
           </div>
         </div>
 
         <div className="space-y-5">
           {/* Syllabus Input */}
           <div>
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 block">Syllabus Content</label>
+            <label className="text-sm font-medium text-[#0A0A0A] dark:text-[#FFFFFF] mb-2 block">Syllabus Content</label>
             <textarea
               value={syllabus}
               onChange={(e) => setSyllabus(e.target.value)}
               placeholder="Paste your syllabus here..."
               rows={6}
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+              className="w-full px-4 py-3 bg-[#F8F9FB] dark:bg-[#0D1117] border border-[#E5E7EB] dark:border-[#2A2F35] rounded-xl text-[#0A0A0A] dark:text-[#FFFFFF] placeholder:text-[#1A1A1A] dark:placeholder:text-[#E4E4E4] focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
             />
           </div>
 
           {/* Days Left Input and Generate Button */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 block">Days Left Until Exam</label>
+              <label className="text-sm font-medium text-[#0A0A0A] dark:text-[#FFFFFF] mb-2 block">Days Left Until Exam</label>
               <input
                 type="number"
                 value={daysLeft}
@@ -178,7 +178,7 @@ export default function RevisionStrategy() {
                 placeholder="e.g., 7"
                 min="1"
                 max="30"
-                className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 bg-[#F8F9FB] dark:bg-[#0D1117] border border-[#E5E7EB] dark:border-[#2A2F35] rounded-xl text-[#0A0A0A] dark:text-[#FFFFFF] placeholder:text-[#1A1A1A] dark:placeholder:text-[#E4E4E4] focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
               />
             </div>
 
@@ -210,14 +210,14 @@ export default function RevisionStrategy() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6"
+          className="neon-card p-6"
         >
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
-              <BookMarked className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white">Your Revision Schedule</h3>
+              <BookMarked className="w-6 h-6 text-neonPurple" />
+              <h3 className="text-lg font-bold text-white glow-purple">Your Revision Schedule</h3>
             </div>
-            <span className="text-sm text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-4 py-1.5 rounded-full font-medium">
+            <span className="text-sm text-[#1A1A1A] dark:text-[#E4E4E4] bg-[#F8F9FB] dark:bg-[#0D1117] px-4 py-1.5 rounded-full font-medium">
               {schedule.length} days plan
             </span>
           </div>
@@ -243,8 +243,8 @@ export default function RevisionStrategy() {
                 {/* Day Content */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-3 mb-4">
-                    <h4 className="text-gray-900 dark:text-white font-bold text-lg">Day {dayPlan.day}</h4>
-                    <span className="text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-lg font-medium">
+                    <h4 className="text-[#0A0A0A] dark:text-[#FFFFFF] font-bold text-lg">Day {dayPlan.day}</h4>
+                    <span className="text-sm text-[#1A1A1A] dark:text-[#E4E4E4] bg-[#F8F9FB] dark:bg-[#0D1117] px-3 py-1 rounded-lg font-medium">
                       {dayPlan.date}
                     </span>
                   </div>
@@ -254,13 +254,13 @@ export default function RevisionStrategy() {
                     {dayPlan.sessions.map((session, sessionIndex) => (
                       <div
                         key={sessionIndex}
-                        className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-colors"
+                        className="bg-[#F8F9FB] dark:bg-[#0D1117] rounded-xl p-4 border border-[#E5E7EB] dark:border-[#2A2F35] hover:border-[#E5E7EB] dark:hover:border-[#2A2F35] transition-colors"
                       >
                         <div className="flex items-start gap-3">
                           <Clock className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mt-1 flex-shrink-0" />
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 mb-2">
-                              <span className="text-sm text-gray-700 dark:text-gray-300 font-semibold">
+                              <span className="text-sm text-[#1A1A1A] dark:text-[#E4E4E4] font-semibold">
                                 {session.time}
                               </span>
                               <span
@@ -271,7 +271,7 @@ export default function RevisionStrategy() {
                                 {session.priority}
                               </span>
                             </div>
-                            <p className="text-gray-900 dark:text-white leading-relaxed">{session.topic}</p>
+                            <p className="text-[#0A0A0A] dark:text-[#FFFFFF] leading-relaxed">{session.topic}</p>
                           </div>
                         </div>
                       </div>
@@ -283,8 +283,8 @@ export default function RevisionStrategy() {
           </div>
 
           {/* Action Buttons */}
-          <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700 flex gap-3">
-            <button className="flex-1 px-4 py-3 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 rounded-xl text-gray-700 dark:text-gray-300 text-sm font-semibold transition-all duration-300">
+          <div className="mt-6 pt-6 border-t border-[#E5E7EB] dark:border-[#2A2F35] flex gap-3">
+            <button className="flex-1 px-4 py-3 bg-[#F8F9FB] dark:bg-[#0D1117] hover:bg-[#E5E7EB] dark:hover:bg-[#111418] border border-[#E5E7EB] dark:border-[#2A2F35] hover:border-[#E5E7EB] dark:hover:border-[#2A2F35] rounded-xl text-[#0A0A0A] dark:text-[#FFFFFF] text-sm font-semibold transition-all duration-300">
               Export as PDF
             </button>
             <button className="flex-1 px-4 py-3 bg-gradient-to-r from-pink-500 to-indigo-500 hover:from-pink-600 hover:to-indigo-600 rounded-xl text-white text-sm font-semibold transition-all duration-300 shadow-lg hover:shadow-xl">
@@ -296,9 +296,9 @@ export default function RevisionStrategy() {
 
       {/* Empty State */}
       {!schedule && !isGenerating && (
-        <div className="bg-gray-50 dark:bg-gray-800/30 rounded-2xl border border-gray-200 dark:border-gray-700 p-12 text-center">
+        <div className="bg-[#F8F9FB] dark:bg-[#0D1117] rounded-2xl border border-[#E5E7EB] dark:border-[#2A2F35] p-12 text-center transition-all duration-300">
           <Calendar className="w-20 h-20 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
-          <p className="text-gray-500 dark:text-gray-400 text-sm">
+          <p className="text-[#1A1A1A] dark:text-[#E4E4E4] text-sm">
             Enter your syllabus and days left to generate a revision strategy
           </p>
         </div>

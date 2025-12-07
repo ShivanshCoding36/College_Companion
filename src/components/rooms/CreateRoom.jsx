@@ -41,11 +41,11 @@ export default function CreateRoom() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 md:p-8"
+      className="neon-card p-6 md:p-8"
     >
       <div className="flex items-center gap-3 mb-6">
-        <div className="p-3 bg-blue-50 dark:bg-blue-500/10 rounded-xl">
-          <Plus className="w-6 h-6 text-blue-600 dark:text-blue-500" />
+        <div className="p-3 bg-neonPurple/20 rounded-xl">
+          <Plus className="w-6 h-6 text-neonPurple" />
         </div>
         <div>
           <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">Create Room</h2>

@@ -136,25 +136,25 @@ export default function SemesterEssentials() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
+        className="neon-card overflow-hidden"
       >
         <button
           onClick={() => toggleSection(sectionKey)}
-          className="w-full px-6 py-5 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
+          className="w-full px-6 py-5 flex items-center justify-between hover:bg-white/5 transition-colors"
         >
           <div className="flex items-center gap-4">
             <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center shadow-md`}>
               <Icon className="w-6 h-6 text-white" />
             </div>
             <div className="text-left">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{title}</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400">{items?.length || 0} items</p>
+              <h3 className="text-lg font-semibold text-[#0A0A0A] dark:text-[#FFFFFF]">{title}</h3>
+              <p className="text-sm text-[#1A1A1A] dark:text-[#E4E4E4]">{items?.length || 0} items</p>
             </div>
           </div>
           {isExpanded ? (
-            <ChevronUp className="w-5 h-5 text-gray-400 dark:text-gray-500" />
+            <ChevronUp className="w-5 h-5 text-[#1A1A1A] dark:text-[#E4E4E4]" />
           ) : (
-            <ChevronDown className="w-5 h-5 text-gray-400 dark:text-gray-500" />
+            <ChevronDown className="w-5 h-5 text-[#1A1A1A] dark:text-[#E4E4E4]" />
           )}
         </button>
 
@@ -165,9 +165,9 @@ export default function SemesterEssentials() {
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="border-t border-gray-200 dark:border-gray-700"
+              className="border-t border-[#E5E7EB] dark:border-[#2A2F35]"
             >
-              <div className="px-6 py-5 space-y-3 bg-gray-50 dark:bg-gray-800/30">
+              <div className="px-6 py-5 space-y-3 bg-[#F8F9FB] dark:bg-[#0D1117]">
                 {items && items.length > 0 ? (
                   items.map((item, index) => (
                     <motion.div
@@ -175,14 +175,14 @@ export default function SemesterEssentials() {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.05 }}
-                      className="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-300"
+                      className="flex items-start gap-3 text-sm text-[#0A0A0A] dark:text-[#FFFFFF]"
                     >
                       <span className={`mt-2 w-2 h-2 rounded-full bg-gradient-to-r ${color} flex-shrink-0`} />
                       <span className="leading-relaxed">{item}</span>
                     </motion.div>
                   ))
                 ) : (
-                  <p className="text-gray-400 dark:text-gray-500 text-sm">No items available</p>
+                  <p className="text-[#1A1A1A] dark:text-[#E4E4E4] text-sm">No items available</p>
                 )}
               </div>
             </motion.div>
@@ -194,19 +194,33 @@ export default function SemesterEssentials() {
 
   return (
     <div className="space-y-6">
+      {/* Header with Glow */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mb-8"
+      >
+        <h1 className="text-4xl font-bold text-[#3b82f6] drop-shadow-[0_0_10px_rgba(59,130,246,0.6)] dark:drop-shadow-[0_0_12px_rgba(59,130,246,0.9)] mb-2">
+          Semester Essentials
+        </h1>
+        <p className="text-[#1A1A1A] dark:text-[#E4E4E4]">
+          Upload your syllabus to extract key topics and exam insights
+        </p>
+      </motion.div>
+
       {/* Upload Section */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6"
+        className="bg-white dark:bg-[#111418] rounded-2xl shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:shadow-none border border-[#E5E7EB] dark:border-[#2A2F35] p-6 transition-all duration-300"
       >
         <div className="flex items-center gap-4 mb-6">
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center shadow-md">
             <Upload className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Upload Syllabus</h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Upload image or PDF to extract essentials</p>
+            <h3 className="text-xl font-semibold text-[#0A0A0A] dark:text-[#FFFFFF]">Upload Syllabus</h3>
+            <p className="text-sm text-[#1A1A1A] dark:text-[#E4E4E4]">Upload image or PDF to extract essentials</p>
           </div>
         </div>
 
@@ -218,7 +232,7 @@ export default function SemesterEssentials() {
           className={`relative border-2 border-dashed rounded-2xl p-8 transition-all duration-300 ${
             isDragging
               ? "border-indigo-400 bg-indigo-50 dark:bg-indigo-500/10"
-              : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 bg-gray-50 dark:bg-gray-800/50"
+              : "border-[#E5E7EB] dark:border-[#2A2F35] hover:border-gray-400 dark:hover:border-gray-500 bg-[#F8F9FB] dark:bg-[#0D1117]"
           }`}
         >
           <input
@@ -230,11 +244,11 @@ export default function SemesterEssentials() {
 
           {!file ? (
             <div className="text-center">
-              <Upload className="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
-              <p className="text-base font-medium text-gray-900 dark:text-white mb-2">
+              <Upload className="w-16 h-16 text-[#1A1A1A] dark:text-[#E4E4E4] mx-auto mb-4" />
+              <p className="text-base font-medium text-[#0A0A0A] dark:text-[#FFFFFF] mb-2">
                 Drag & drop your syllabus file here, or click to browse
               </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Supports JPG, PNG, PDF, MP4 (Max 10MB)</p>
+              <p className="text-sm text-[#1A1A1A] dark:text-[#E4E4E4]">Supports JPG, PNG, PDF, MP4 (Max 10MB)</p>
             </div>
           ) : (
             <div className="flex items-center gap-4">
@@ -242,11 +256,11 @@ export default function SemesterEssentials() {
                 <img 
                   src={preview} 
                   alt="Preview" 
-                  className="w-24 h-24 object-cover rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm" 
+                  className="w-24 h-24 object-cover rounded-xl border border-[#E5E7EB] dark:border-[#2A2F35] shadow-sm" 
                 />
               ) : (
-                <div className="w-24 h-24 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center border border-gray-200 dark:border-gray-700">
-                  <FileText className="w-10 h-10 text-gray-400 dark:text-gray-500" />
+                <div className="w-24 h-24 bg-[#F8F9FB] dark:bg-[#0D1117] rounded-xl flex items-center justify-center border border-[#E5E7EB] dark:border-[#2A2F35]">
+                  <FileText className="w-10 h-10 text-[#1A1A1A] dark:text-[#E4E4E4]" />
                 </div>
               )}
               <div className="flex-1 min-w-0">

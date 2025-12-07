@@ -140,38 +140,38 @@ export default function SurvivalPlan() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6"
+        className="neon-card p-6"
       >
         <div className="flex items-center gap-4 mb-6">
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center shadow-md">
             <Target className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white">AI Survival Plan Generator</h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Personalized study plan with weekly breakdowns</p>
+            <h3 className="text-xl font-bold glow-purple">AI Survival Plan Generator</h3>
+            <p className="text-sm text-[#1A1A1A] dark:text-[#E4E4E4]">Personalized study plan with weekly breakdowns</p>
           </div>
         </div>
 
         <div className="space-y-5">
           {/* Current Skills */}
           <div>
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 block">Current Skills (comma-separated)</label>
+            <label className="text-sm font-medium text-[#0A0A0A] dark:text-[#FFFFFF] mb-2 block">Current Skills (comma-separated)</label>
             <input
               type="text"
               value={userSkills}
               onChange={(e) => setUserSkills(e.target.value)}
               placeholder="e.g., Python, Data Structures, Basic Algorithms"
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 bg-[#F8F9FB] dark:bg-[#0D1117] border border-[#E5E7EB] dark:border-[#2A2F35] rounded-xl text-[#0A0A0A] dark:text-[#FFFFFF] placeholder:text-[#1A1A1A] dark:placeholder:text-[#E4E4E4] focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             />
           </div>
 
           {/* Stress Level */}
           <div>
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 block">Stress Level</label>
+            <label className="text-sm font-medium text-[#0A0A0A] dark:text-[#FFFFFF] mb-2 block">Stress Level</label>
             <select
               value={stressLevel}
               onChange={(e) => setStressLevel(e.target.value)}
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all cursor-pointer"
+              className="w-full px-4 py-3 bg-[#F8F9FB] dark:bg-[#0D1117] border border-[#E5E7EB] dark:border-[#2A2F35] rounded-xl text-[#0A0A0A] dark:text-[#FFFFFF] focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all cursor-pointer"
             >
               <option value="low">Low - Comfortable pace</option>
               <option value="medium">Medium - Balanced approach</option>
@@ -181,37 +181,37 @@ export default function SurvivalPlan() {
 
           {/* Time Available */}
           <div>
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 block">Time Available</label>
+            <label className="text-sm font-medium text-[#0A0A0A] dark:text-[#FFFFFF] mb-2 block">Time Available</label>
             <input
               type="text"
               value={timeAvailable}
               onChange={(e) => setTimeAvailable(e.target.value)}
               placeholder="e.g., 4 hours per day, 20 hours per week"
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 bg-[#F8F9FB] dark:bg-[#0D1117] border border-[#E5E7EB] dark:border-[#2A2F35] rounded-xl text-[#0A0A0A] dark:text-[#FFFFFF] placeholder:text-[#1A1A1A] dark:placeholder:text-[#E4E4E4] focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             />
           </div>
 
           {/* Exam Dates */}
           <div>
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 block">Exam Dates (comma-separated)</label>
+            <label className="text-sm font-medium text-[#0A0A0A] dark:text-[#FFFFFF] mb-2 block">Exam Dates (comma-separated)</label>
             <input
               type="text"
               value={examDates}
               onChange={(e) => setExamDates(e.target.value)}
               placeholder="e.g., 2024-01-15, 2024-01-20, 2024-01-25"
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 bg-[#F8F9FB] dark:bg-[#0D1117] border border-[#E5E7EB] dark:border-[#2A2F35] rounded-xl text-[#0A0A0A] dark:text-[#FFFFFF] placeholder:text-[#1A1A1A] dark:placeholder:text-[#E4E4E4] focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             />
           </div>
 
           {/* Goals */}
           <div>
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 block">Goals</label>
+            <label className="text-sm font-medium text-[#0A0A0A] dark:text-[#FFFFFF] mb-2 block">Goals</label>
             <textarea
               value={goals}
               onChange={(e) => setGoals(e.target.value)}
               placeholder="e.g., Master Data Structures, Score 85%+ in finals, Build strong foundation for placements"
               rows={3}
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+              className="w-full px-4 py-3 bg-[#F8F9FB] dark:bg-[#0D1117] border border-[#E5E7EB] dark:border-[#2A2F35] rounded-xl text-[#0A0A0A] dark:text-[#FFFFFF] placeholder:text-[#1A1A1A] dark:placeholder:text-[#E4E4E4] focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
             />
           </div>
 
@@ -296,11 +296,11 @@ export default function SurvivalPlan() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6"
+              className="neon-card p-6"
             >
               <div className="flex items-center gap-3 mb-6">
-                <Calendar className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white">Weekly Plan</h3>
+                <Calendar className="w-6 h-6 text-neonPurple" />
+                <h3 className="text-lg font-bold text-white glow-purple">Weekly Plan</h3>
               </div>
               <div className="space-y-4">
                 {plan.weeklyPlan.map((week, index) => (
@@ -309,18 +309,18 @@ export default function SurvivalPlan() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-5 border border-gray-200 dark:border-gray-700"
+                    className="bg-[#F8F9FB] dark:bg-[#0D1117] rounded-xl p-5 border border-[#E5E7EB] dark:border-[#2A2F35] transition-all duration-300"
                   >
                     <div className="flex items-start gap-4">
                       <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center shadow-md">
                         <span className="text-white font-bold text-lg">W{week.week}</span>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h4 className="text-gray-900 dark:text-white font-semibold mb-3">{week.focus}</h4>
+                        <h4 className="text-[#0A0A0A] dark:text-[#FFFFFF] font-semibold mb-3">{week.focus}</h4>
                         {week.tasks && week.tasks.length > 0 && (
                           <ul className="space-y-2 mb-3">
                             {week.tasks.map((task, i) => (
-                              <li key={i} className="text-gray-700 dark:text-gray-300 text-sm flex items-start gap-2">
+                              <li key={i} className="text-[#1A1A1A] dark:text-[#E4E4E4] text-sm flex items-start gap-2">
                                 <span className="text-indigo-600 dark:text-indigo-400 mt-1">•</span>
                                 <span className="leading-relaxed">{task}</span>
                               </li>
@@ -350,11 +350,11 @@ export default function SurvivalPlan() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6"
+              className="neon-card p-6"
             >
               <div className="flex items-center gap-3 mb-6">
-                <Clock className="w-6 h-6 text-orange-500 dark:text-orange-400" />
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white">Daily Timetable</h3>
+                <Clock className="w-6 h-6 text-neonPink" />
+                <h3 className="text-lg font-bold text-white glow-pink">Daily Timetable</h3>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {plan.dailySchedule.map((day, index) => (
@@ -363,14 +363,14 @@ export default function SurvivalPlan() {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.1 + index * 0.05 }}
-                    className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-5 border border-gray-200 dark:border-gray-700"
+                    className="bg-[#F8F9FB] dark:bg-[#0D1117] rounded-xl p-5 border border-[#E5E7EB] dark:border-[#2A2F35] transition-all duration-300"
                   >
-                    <h4 className="text-gray-900 dark:text-white font-semibold mb-4">{day.day}</h4>
+                    <h4 className="text-[#0A0A0A] dark:text-[#FFFFFF] font-semibold mb-4">{day.day}</h4>
                     <div className="space-y-3">
                       {day.timeSlots && day.timeSlots.map((slot, i) => (
                         <div key={i} className="flex items-start gap-3">
                           <span className="text-indigo-600 dark:text-indigo-400 text-xs font-mono font-semibold flex-shrink-0 mt-0.5">{slot.time}</span>
-                          <span className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">{slot.activity}</span>
+                          <span className="text-[#1A1A1A] dark:text-[#E4E4E4] text-sm leading-relaxed">{slot.activity}</span>
                         </div>
                       ))}
                     </div>
@@ -386,11 +386,11 @@ export default function SurvivalPlan() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6"
+              className="neon-card p-6"
             >
               <div className="flex items-center gap-3 mb-6">
-                <TrendingUp className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white">Skill Roadmap</h3>
+                <TrendingUp className="w-6 h-6 text-neonBlue" />
+                <h3 className="text-lg font-bold text-white glow-blue">Skill Roadmap</h3>
               </div>
               <div className="space-y-4">
                 {plan.skillRoadmap.map((skill, index) => (
@@ -399,25 +399,25 @@ export default function SurvivalPlan() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.2 + index * 0.1 }}
-                    className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-5 border border-gray-200 dark:border-gray-700"
+                    className="bg-[#F8F9FB] dark:bg-[#0D1117] rounded-xl p-5 border border-[#E5E7EB] dark:border-[#2A2F35] transition-all duration-300"
                   >
-                    <h4 className="text-gray-900 dark:text-white font-medium mb-3">{skill.skill}</h4>
+                    <h4 className="text-[#0A0A0A] dark:text-[#FFFFFF] font-medium mb-3">{skill.skill}</h4>
                     <div className="flex items-center gap-4 mb-3">
                       <div className="flex items-center gap-2">
-                        <span className="text-gray-500 dark:text-gray-400 text-xs font-medium">Current:</span>
+                        <span className="text-[#1A1A1A] dark:text-[#E4E4E4] text-xs font-medium">Current:</span>
                         <span className="px-3 py-1 bg-yellow-50 dark:bg-yellow-500/10 border border-yellow-200 dark:border-yellow-500/30 rounded-lg text-yellow-600 dark:text-yellow-400 text-xs font-medium">
                           {skill.currentLevel}
                         </span>
                       </div>
                       <span className="text-gray-400 dark:text-gray-500">→</span>
                       <div className="flex items-center gap-2">
-                        <span className="text-gray-500 dark:text-gray-400 text-xs font-medium">Target:</span>
+                        <span className="text-[#1A1A1A] dark:text-[#E4E4E4] text-xs font-medium">Target:</span>
                         <span className="px-3 py-1 bg-green-50 dark:bg-green-500/10 border border-green-200 dark:border-green-500/30 rounded-lg text-green-600 dark:text-green-400 text-xs font-medium">
                           {skill.targetLevel}
                         </span>
                       </div>
                     </div>
-                    <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">{skill.action}</p>
+                    <p className="text-[#1A1A1A] dark:text-[#E4E4E4] text-sm leading-relaxed">{skill.action}</p>
                   </motion.div>
                 ))}
               </div>
@@ -430,11 +430,11 @@ export default function SurvivalPlan() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6"
+              className="neon-card p-6"
             >
               <div className="flex items-center gap-3 mb-6">
-                <Brain className="w-6 h-6 text-pink-600 dark:text-pink-400" />
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white">Revision Strategy</h3>
+                <Brain className="w-6 h-6 text-neonPink" />
+                <h3 className="text-lg font-bold text-white glow-pink">Revision Strategy</h3>
               </div>
               <div className="space-y-4">
                 {plan.revisionPlan.map((phase, index) => (
@@ -443,13 +443,13 @@ export default function SurvivalPlan() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.3 + index * 0.1 }}
-                    className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-5 border border-gray-200 dark:border-gray-700"
+                    className="bg-[#F8F9FB] dark:bg-[#0D1117] rounded-xl p-5 border border-[#E5E7EB] dark:border-[#2A2F35] transition-all duration-300"
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1 min-w-0">
-                        <h4 className="text-gray-900 dark:text-white font-medium mb-2">{phase.phase}</h4>
-                        <p className="text-gray-700 dark:text-gray-300 text-sm mb-2 leading-relaxed">{phase.focus}</p>
-                        <p className="text-gray-500 dark:text-gray-400 text-xs">Method: {phase.method}</p>
+                        <h4 className="text-[#0A0A0A] dark:text-[#FFFFFF] font-medium mb-2">{phase.phase}</h4>
+                        <p className="text-[#1A1A1A] dark:text-[#E4E4E4] text-sm mb-2 leading-relaxed">{phase.focus}</p>
+                        <p className="text-[#1A1A1A] dark:text-[#E4E4E4] text-xs">Method: {phase.method}</p>
                       </div>
                       <span className="px-3 py-1.5 bg-pink-50 dark:bg-pink-500/10 border border-pink-200 dark:border-pink-500/30 rounded-full text-pink-600 dark:text-pink-400 text-xs font-semibold whitespace-nowrap">
                         {phase.duration}
@@ -467,11 +467,11 @@ export default function SurvivalPlan() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6"
+              className="neon-card p-6"
             >
               <div className="flex items-center gap-3 mb-6">
-                <Target className="w-6 h-6 text-red-600 dark:text-red-400" />
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white">Exam Tactics</h3>
+                <Target className="w-6 h-6 text-neonRed" />
+                <h3 className="text-lg font-bold text-white glow-pink">Exam Tactics</h3>
               </div>
               <div className="space-y-4">
                 {plan.examStrategy.map((exam, index) => (
@@ -480,10 +480,10 @@ export default function SurvivalPlan() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.4 + index * 0.1 }}
-                    className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-5 border border-gray-200 dark:border-gray-700"
+                    className="bg-[#F8F9FB] dark:bg-[#0D1117] rounded-xl p-5 border border-[#E5E7EB] dark:border-[#2A2F35] transition-all duration-300"
                   >
                     <div className="flex items-start justify-between gap-4 mb-3">
-                      <h4 className="text-gray-900 dark:text-white font-medium">{exam.subject}</h4>
+                      <h4 className="text-[#0A0A0A] dark:text-[#FFFFFF] font-medium">{exam.subject}</h4>
                       <span className={`px-3 py-1.5 rounded-full text-xs font-semibold border ${getPriorityColor(exam.priority?.toLowerCase())}`}>
                         {exam.priority}
                       </span>
@@ -491,7 +491,7 @@ export default function SurvivalPlan() {
                     {exam.tactics && exam.tactics.length > 0 && (
                       <ul className="space-y-2">
                         {exam.tactics.map((tactic, i) => (
-                          <li key={i} className="text-gray-700 dark:text-gray-300 text-sm flex items-start gap-2">
+                          <li key={i} className="text-[#1A1A1A] dark:text-[#E4E4E4] text-sm flex items-start gap-2">
                             <span className="text-red-600 dark:text-red-400">✓</span>
                             <span className="leading-relaxed">{tactic}</span>
                           </li>
@@ -514,7 +514,7 @@ export default function SurvivalPlan() {
             >
               <div className="flex items-center gap-3 mb-6">
                 <Zap className="w-6 h-6 text-green-600 dark:text-green-400" />
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white">Productivity Hacks</h3>
+                <h3 className="text-lg font-bold text-[#0A0A0A] dark:text-[#FFFFFF]">Productivity Hacks</h3>
               </div>
               <ul className="space-y-3">
                 {plan.productivityRules.map((rule, index) => (
@@ -523,7 +523,7 @@ export default function SurvivalPlan() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.5 + index * 0.1 }}
-                    className="flex items-start gap-3 text-gray-800 dark:text-gray-200"
+                    className="flex items-start gap-3 text-[#0A0A0A] dark:text-[#FFFFFF]"
                   >
                     <span className="text-green-600 dark:text-green-400 mt-1 text-lg">✓</span>
                     <span className="leading-relaxed">{rule}</span>
@@ -537,9 +537,9 @@ export default function SurvivalPlan() {
 
       {/* Empty State */}
       {!plan && !isGenerating && (
-        <div className="bg-gray-50 dark:bg-gray-800/30 rounded-2xl border border-gray-200 dark:border-gray-700 p-12 text-center">
+        <div className="bg-[#F8F9FB] dark:bg-[#0D1117] rounded-2xl border border-[#E5E7EB] dark:border-[#2A2F35] p-12 text-center transition-all duration-300">
           <Target className="w-20 h-20 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
-          <p className="text-gray-500 dark:text-gray-400 text-sm">
+          <p className="text-[#1A1A1A] dark:text-[#E4E4E4] text-sm">
             Fill in your details above to generate a personalized AI survival plan
           </p>
         </div>

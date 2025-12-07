@@ -99,7 +99,7 @@ export default function NotesRepository() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6"
+        className="neon-card p-6"
       >
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-4">
@@ -107,8 +107,8 @@ export default function NotesRepository() {
               <Upload className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white">Notes Repository</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Upload and organize your study materials</p>
+              <h3 className="text-xl font-bold text-white glow-purple">Notes Repository</h3>
+              <p className="text-sm text-[#1A1A1A] dark:text-[#E4E4E4]">Upload and organize your study materials</p>
             </div>
           </div>
 
@@ -130,26 +130,26 @@ export default function NotesRepository() {
               exit={{ opacity: 0, height: 0 }}
               className="overflow-hidden"
             >
-              <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-5 border border-gray-200 dark:border-gray-700 space-y-5 mt-4">
+              <div className="bg-[#F8F9FB] dark:bg-[#0D1117] rounded-xl p-5 border border-[#E5E7EB] dark:border-[#2A2F35] space-y-5 mt-4 transition-all duration-300">
                 {/* Title Input */}
                 <div>
-                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 block">Title</label>
+                  <label className="text-sm font-medium text-[#0A0A0A] dark:text-[#FFFFFF] mb-2 block">Title</label>
                   <input
                     type="text"
                     value={newNote.title}
                     onChange={(e) => setNewNote({ ...newNote, title: e.target.value })}
                     placeholder="e.g., OOP Concepts Summary"
-                    className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-white dark:bg-[#111418] border border-[#E5E7EB] dark:border-[#2A2F35] rounded-xl text-[#0A0A0A] dark:text-[#FFFFFF] placeholder:text-[#1A1A1A] dark:placeholder:text-[#E4E4E4] focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
                   />
                 </div>
 
                 {/* Category Selector */}
                 <div>
-                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 block">Category (Subject)</label>
+                  <label className="text-sm font-medium text-[#0A0A0A] dark:text-[#FFFFFF] mb-2 block">Category (Subject)</label>
                   <select
                     value={newNote.category}
                     onChange={(e) => setNewNote({ ...newNote, category: e.target.value })}
-                    className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all cursor-pointer"
+                    className="w-full px-4 py-3 bg-white dark:bg-[#111418] border border-[#E5E7EB] dark:border-[#2A2F35] rounded-xl text-[#0A0A0A] dark:text-[#FFFFFF] focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all cursor-pointer"
                   >
                     <option value="">Select a category</option>
                     {categories.map((cat) => (
@@ -162,7 +162,7 @@ export default function NotesRepository() {
 
                 {/* File Upload */}
                 <div>
-                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 block">File</label>
+                  <label className="text-sm font-medium text-[#0A0A0A] dark:text-[#FFFFFF] mb-2 block">File</label>
                   <div className="relative">
                     <input
                       type="file"
@@ -173,10 +173,10 @@ export default function NotesRepository() {
                     />
                     <label
                       htmlFor="file-upload"
-                      className="flex items-center justify-center gap-3 w-full px-4 py-8 bg-white dark:bg-gray-900 border-2 border-dashed border-gray-300 dark:border-gray-600 hover:border-green-500 dark:hover:border-green-500 rounded-xl cursor-pointer transition-colors group"
+                      className="flex items-center justify-center gap-3 w-full px-4 py-8 bg-white dark:bg-[#111418] border-2 border-dashed border-[#E5E7EB] dark:border-[#2A2F35] hover:border-green-500 dark:hover:border-green-500 rounded-xl cursor-pointer transition-colors group"
                     >
                       <Upload className="w-6 h-6 text-gray-400 dark:text-gray-500 group-hover:text-green-500" />
-                      <span className="text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white font-medium">
+                      <span className="text-[#1A1A1A] dark:text-[#E4E4E4] group-hover:text-[#0A0A0A] dark:group-hover:text-[#FFFFFF] font-medium">
                         {newNote.file ? newNote.file.name : "Click to upload PDF or Image"}
                       </span>
                     </label>
@@ -202,11 +202,11 @@ export default function NotesRepository() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="bg-white dark:bg-dark-surface rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6"
+        className="bg-white dark:bg-[#111418] rounded-2xl shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:shadow-none border border-[#E5E7EB] dark:border-[#2A2F35] p-6 transition-all duration-300"
       >
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white">My Notes</h3>
-          <span className="text-sm text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-4 py-1.5 rounded-full font-medium">
+          <h3 className="text-lg font-bold text-[#0A0A0A] dark:text-[#FFFFFF]">My Notes</h3>
+          <span className="text-sm text-[#1A1A1A] dark:text-[#E4E4E4] bg-[#F8F9FB] dark:bg-[#0D1117] px-4 py-1.5 rounded-full font-medium">
             {notes.length} files
           </span>
         </div>
@@ -214,7 +214,7 @@ export default function NotesRepository() {
         {notes.length === 0 ? (
           <div className="text-center py-12">
             <FileText className="w-20 h-20 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
-            <p className="text-gray-500 dark:text-gray-400 text-sm">No notes uploaded yet</p>
+            <p className="text-[#1A1A1A] dark:text-[#E4E4E4] text-sm">No notes uploaded yet</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -224,11 +224,11 @@ export default function NotesRepository() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.05 }}
-                className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-5 border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-300 group"
+                className="bg-[#F8F9FB] dark:bg-[#0D1117] rounded-xl p-5 border border-[#E5E7EB] dark:border-[#2A2F35] hover:border-[#E5E7EB] dark:hover:border-[#2A2F35] transition-all duration-300 group"
               >
                 {/* File Icon */}
                 <div className="flex items-start justify-between mb-4">
-                  <div className="w-14 h-14 rounded-xl bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center">
+                  <div className="w-14 h-14 rounded-xl bg-[#F8F9FB] dark:bg-[#0D1117] border border-[#E5E7EB] dark:border-[#2A2F35] flex items-center justify-center">
                     {getFileIcon(note.type)}
                   </div>
                   <button
@@ -241,22 +241,22 @@ export default function NotesRepository() {
                 </div>
 
                 {/* Note Info */}
-                <h4 className="text-gray-900 dark:text-white font-semibold mb-1 line-clamp-1">{note.title}</h4>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">{note.category}</p>
+                <h4 className="text-[#0A0A0A] dark:text-[#FFFFFF] font-semibold mb-1 line-clamp-1">{note.title}</h4>
+                <p className="text-xs text-[#1A1A1A] dark:text-[#E4E4E4] mb-4">{note.category}</p>
 
                 {/* Metadata */}
-                <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mb-4">
+                <div className="flex items-center justify-between text-xs text-[#1A1A1A] dark:text-[#E4E4E4] mb-4">
                   <span>{note.uploadDate}</span>
                   <span>{note.size}</span>
                 </div>
 
                 {/* Actions */}
                 <div className="flex gap-2">
-                  <button className="flex-1 px-3 py-2.5 bg-white dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-300 dark:border-gray-600 hover:border-indigo-500 dark:hover:border-indigo-500 rounded-lg text-gray-700 dark:text-gray-300 text-xs font-semibold transition-all duration-300 flex items-center justify-center gap-1.5">
+                  <button className="flex-1 px-3 py-2.5 bg-white dark:bg-[#111418] hover:bg-[#F8F9FB] dark:hover:bg-[#0D1117] border border-[#E5E7EB] dark:border-[#2A2F35] hover:border-indigo-500 dark:hover:border-indigo-500 rounded-lg text-[#0A0A0A] dark:text-[#FFFFFF] text-xs font-semibold transition-all duration-300 flex items-center justify-center gap-1.5">
                     <Eye className="w-4 h-4" />
                     View
                   </button>
-                  <button className="flex-1 px-3 py-2.5 bg-white dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-300 dark:border-gray-600 hover:border-pink-500 dark:hover:border-pink-500 rounded-lg text-gray-700 dark:text-gray-300 text-xs font-semibold transition-all duration-300 flex items-center justify-center gap-1.5">
+                  <button className="flex-1 px-3 py-2.5 bg-white dark:bg-[#111418] hover:bg-[#F8F9FB] dark:hover:bg-[#0D1117] border border-[#E5E7EB] dark:border-[#2A2F35] hover:border-pink-500 dark:hover:border-pink-500 rounded-lg text-[#0A0A0A] dark:text-[#FFFFFF] text-xs font-semibold transition-all duration-300 flex items-center justify-center gap-1.5">
                     <Download className="w-4 h-4" />
                     Download
                   </button>
