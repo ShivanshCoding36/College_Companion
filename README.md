@@ -69,5 +69,12 @@ export default defineConfig([
       // other options...
     },
   },
+
+## Contributors
+
+- Yugendra N (@Yugenjr)
+- Your Friend Name (@friend-username)
+
+We welcome contributions! Feel free to submit pull requests.
 ])
 ```
