@@ -331,6 +331,8 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
             <img src="https://github.com/Yugenjr.png" width="100px;" alt="Yugendra N"/>
             <br />
             <sub><b>Yugendra N</b></sub>
+            <br />
+            <sub>Project Admin</sub>
         </a>
     </td>
 </tr>
