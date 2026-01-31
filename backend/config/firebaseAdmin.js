@@ -29,6 +29,7 @@ export const initializeFirebaseAdmin = () => {
     // Option 2: Load from environment variables
     else if (process.env.FIREBASE_PROJECT_ID && process.env.FIREBASE_CLIENT_EMAIL && process.env.FIREBASE_PRIVATE_KEY) {
 
+      console.log('🔍 Found Firebase Env Vars. Parsing key...');
       let privateKey = process.env.FIREBASE_PRIVATE_KEY;
 
       // FIX: Clean up the key if it was pasted with quotes or bad formatting
@@ -40,6 +41,9 @@ export const initializeFirebaseAdmin = () => {
       if (privateKey.includes('\\n')) {
         privateKey = privateKey.replace(/\\n/g, '\n');
       }
+
+      console.log(`🔑 Key length after parsing: ${privateKey.length}`);
+      console.log(`📧 Client Email: ${process.env.FIREBASE_CLIENT_EMAIL}`);
 
       serviceAccount = {
         type: 'service_account',
@@ -54,7 +58,12 @@ export const initializeFirebaseAdmin = () => {
         client_x509_cert_url: process.env.FIREBASE_CLIENT_CERT_URL,
       };
     } else {
-      throw new Error('Firebase Admin credentials not found. Provide FIREBASE_SERVICE_ACCOUNT_PATH or individual env vars.');
+      console.error('❌ MISSING FIREBASE VARIABLES:');
+      if (!process.env.FIREBASE_PROJECT_ID) console.error(' - FIREBASE_PROJECT_ID is missing');
+      if (!process.env.FIREBASE_CLIENT_EMAIL) console.error(' - FIREBASE_CLIENT_EMAIL is missing');
+      if (!process.env.FIREBASE_PRIVATE_KEY) console.error(' - FIREBASE_PRIVATE_KEY is missing');
+
+      throw new Error('Firebase Admin credentials not found. Check Render Environment Variables.');
     }
 
     const databaseURL = process.env.RTDB_URL || process.env.FIREBASE_DATABASE_URL;
@@ -64,12 +73,13 @@ export const initializeFirebaseAdmin = () => {
       databaseURL: databaseURL,
     });
 
-    console.log('✅ Firebase Admin SDK initialized');
+    console.log('✅ Firebase Admin SDK initialized successfully');
     console.log(`📦 Project: ${serviceAccount.project_id}`);
 
     return firebaseApp;
   } catch (error) {
-    console.error('❌ Firebase Admin initialization error:', error.message);
+    console.error('❌ FATAL FIREBASE ERROR:', error.message);
+    console.error(error);
     throw error;
   }
 };
