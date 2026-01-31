@@ -22,7 +22,12 @@ router.post('/', verifyFirebaseToken, async (req, res) => {
 
     let user = await User.findOne({ uid });
     if (!user) {
-      user = new User({ uid, profile: { email: req.user.email } });
+      user = new User({
+        _id: uid,
+        uid,
+        email: req.user.email || undefined,
+        profile: { email: req.user.email }
+      });
     }
 
     user.questionGenerator.savedQuestions.push({

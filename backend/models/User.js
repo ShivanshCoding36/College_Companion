@@ -7,7 +7,13 @@ import mongoose from 'mongoose';
  */
 
 const userSchema = new mongoose.Schema({
-  // Firebase UID - unique identifier
+  // Use Firebase UID as MongoDB _id (String, not ObjectId)
+  _id: {
+    type: String,
+    required: true
+  },
+
+  // Firebase UID - unique identifier (same as _id)
   uid: {
     type: String,
     required: true,
