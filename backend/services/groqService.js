@@ -1,19 +1,32 @@
 import Groq from 'groq-sdk';
 
 let groqClient = null;
+let fallbackGroqClient = null;
 
 /**
- * Initialize Groq SDK client
+ * Initialize Groq SDK client with fallback support
  */
 export const initializeGroqClient = () => {
   const apiKey = process.env.GROQ_API_KEY;
-  
-  if (!apiKey) {
-    throw new Error('GROQ_API_KEY environment variable is required');
+  const fallbackKey = process.env.GROQ_FALLBACK_API_KEY;
+
+  if (!apiKey && !fallbackKey) {
+    throw new Error('GROQ_API_KEY or GROQ_FALLBACK_API_KEY environment variable is required');
   }
 
-  groqClient = new Groq({ apiKey });
-  console.log('✅ Groq client initialized');
+  // Initialize primary client
+  if (apiKey) {
+    groqClient = new Groq({ apiKey });
+  } else {
+    groqClient = new Groq({ apiKey: fallbackKey });
+  }
+
+  // Initialize fallback client if both keys are available
+  if (apiKey && fallbackKey && apiKey !== fallbackKey) {
+    fallbackGroqClient = new Groq({ apiKey: fallbackKey });
+  }
+
+  console.log('✅ Groq client initialized with fallback support');
   return groqClient;
 };
 
@@ -28,30 +41,44 @@ export const getGroqClient = () => {
 };
 
 /**
- * Generate completion using Groq
+ * Generate completion using Groq with automatic fallback
  * @param {string} systemPrompt - System instructions
  * @param {string} userPrompt - User message
  * @param {object} options - Additional options (model, temperature, max_tokens)
  * @returns {Promise<string>} - Generated text
  */
 export const generateCompletion = async (systemPrompt, userPrompt, options = {}) => {
+  const requestConfig = {
+    model: options.model || 'llama-3.3-70b-versatile',
+    messages: [
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: userPrompt }
+    ],
+    temperature: options.temperature || 0.7,
+    max_tokens: options.max_tokens || 4096,
+    response_format: options.json ? { type: 'json_object' } : undefined,
+  };
+
   try {
     const client = getGroqClient();
-    
-    const response = await client.chat.completions.create({
-      model: options.model || 'llama-3.3-70b-versatile',
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: userPrompt }
-      ],
-      temperature: options.temperature || 0.7,
-      max_tokens: options.max_tokens || 4096,
-      response_format: options.json ? { type: 'json_object' } : undefined,
-    });
-
+    const response = await client.chat.completions.create(requestConfig);
     return response.choices[0]?.message?.content || '';
   } catch (error) {
-    console.error('❌ Groq API error:', error.message);
+    console.error('❌ Groq API error (primary):', error.message);
+
+    // Try fallback client if available
+    if (fallbackGroqClient) {
+      try {
+        console.log('🔄 Retrying with fallback Groq API key...');
+        const response = await fallbackGroqClient.chat.completions.create(requestConfig);
+        console.log('✅ Fallback Groq API succeeded');
+        return response.choices[0]?.message?.content || '';
+      } catch (fallbackError) {
+        console.error('❌ Groq API error (fallback):', fallbackError.message);
+        throw new Error(`Groq API failed (both primary and fallback): ${fallbackError.message}`);
+      }
+    }
+
     throw new Error(`Groq API failed: ${error.message}`);
   }
 };
@@ -73,7 +100,7 @@ export const generateJSONCompletion = async (systemPrompt, userPrompt, options =
 
     // Try to parse JSON, handling markdown code blocks
     let jsonText = textResponse.trim();
-    
+
     // Remove markdown code blocks if present
     if (jsonText.startsWith('```json')) {
       jsonText = jsonText.replace(/^```json\n/, '').replace(/\n```$/, '');
@@ -127,14 +154,14 @@ export const generateQuestions = async (syllabus, questionType) => {
 Syllabus: ${syllabus}`;
 
   const response = await generateCompletion(systemPrompt, userPrompt, { json: true });
-  
+
   let jsonText = response.trim();
   if (jsonText.startsWith('```json')) {
     jsonText = jsonText.replace(/^```json\n/, '').replace(/\n```$/, '');
   } else if (jsonText.startsWith('```')) {
     jsonText = jsonText.replace(/^```\n/, '').replace(/\n```$/, '');
   }
-  
+
   return JSON.parse(jsonText);
 };
 
@@ -143,7 +170,7 @@ Syllabus: ${syllabus}`;
  */
 export const generateSurvivalPlan = async (params) => {
   const { skills, stressLevel, timeAvailable, examDates, goals } = params;
-  
+
   const systemPrompt = 'You are an academic planning expert. Create comprehensive semester survival plans. Return ONLY valid JSON.';
   const userPrompt = `Create a semester survival plan with these parameters:
 
@@ -177,14 +204,14 @@ Return JSON in this format:
 }`;
 
   const response = await generateCompletion(systemPrompt, userPrompt, { json: true });
-  
+
   let jsonText = response.trim();
   if (jsonText.startsWith('```json')) {
     jsonText = jsonText.replace(/^```json\n/, '').replace(/\n```$/, '');
   } else if (jsonText.startsWith('```')) {
     jsonText = jsonText.replace(/^```\n/, '').replace(/\n```$/, '');
   }
-  
+
   return JSON.parse(jsonText);
 };
 
