@@ -84,7 +84,7 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
 
 app.use(cors({
   origin: (origin, callback) => {
-    // Allow requests with no origin (mobile apps, Postman, etc.)
+    // Allow requests with no origin
     if (!origin) return callback(null, true);
 
     // In development, allow all localhost origins
