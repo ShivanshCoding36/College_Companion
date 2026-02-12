@@ -1,92 +1,99 @@
-import React from "react";
+import { motion } from "framer-motion";
 
-const PrivacyPolicy: React.FC = () => {
+const Section = ({ title, children }: any) => (
+  <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
+    <h2 className="text-xl md:text-2xl font-semibold text-white mb-4">
+      {title}
+    </h2>
+    <div className="text-white/60 leading-relaxed text-sm md:text-base space-y-3">
+      {children}
+    </div>
+  </div>
+);
+
+const PrivacyPolicy = () => {
   return (
-    <div className="px-6 lg:px-24 py-12 text-gray-800">
-      <h1 className="text-4xl font-bold text-center mb-8">
-        Privacy Policy
-      </h1>
+    <div className="relative min-h-screen bg-[#050505] overflow-hidden">
+      {/* glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[400px] bg-blue-600/10 blur-[140px]" />
 
-      <p className="mb-6">
-        Effective Date: <strong>February 12, 2026</strong>
-      </p>
+      <div className="relative z-10 max-w-5xl mx-auto px-6 py-20">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          {/* header */}
+          <div className="text-center mb-14">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Privacy Policy
+            </h1>
+            <p className="text-white/50 text-sm">
+              Last updated: February 12, 2026
+            </p>
+          </div>
 
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-3">
-          Introduction
-        </h2>
-        <p>
-          Welcome to College Companion (“we”, “our”, “us”). This Privacy Policy
-          explains how we collect, use, disclose, and safeguard your information
-          when you visit our website <a href="https://mernproj1.vercel.app/">https://mernproj1.vercel.app/</a>
-          .
-        </p>
-      </section>
+          <div className="space-y-8">
 
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-3">
-          Information We Collect
-        </h2>
-        <ul className="list-disc ml-6">
-          <li>Personal Data you voluntarily provide (name, email, etc.)</li>
-          <li>Usage Data from site interactions and analytics</li>
-          <li>Cookies and tracking technologies</li>
-        </ul>
-      </section>
+            <Section title="Introduction">
+              <p>
+                College Companion values your privacy. This policy explains how
+                we collect, use, and protect your information when you use our
+                platform and services.
+              </p>
+            </Section>
 
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-3">
-          How We Use Your Information
-        </h2>
-        <p>
-          We use your information to:
-        </p>
-        <ul className="list-disc ml-6">
-          <li>Deliver and improve our services</li>
-          <li>Communicate updates and support</li>
-          <li>Ensure security and personalized experience</li>
-        </ul>
-      </section>
+            <Section title="Information We Collect">
+              <ul className="list-disc ml-5 space-y-2">
+                <li>Name and email when you register</li>
+                <li>Account and academic usage data</li>
+                <li>Analytics and device information</li>
+                <li>Messages or content you submit</li>
+              </ul>
+            </Section>
 
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-3">
-          Sharing Your Information
-        </h2>
-        <p>
-          We do not sell personal information. We may share data with:
-        </p>
-        <ul className="list-disc ml-6">
-          <li>Service providers</li>
-          <li>Law enforcement when legally required</li>
-        </ul>
-      </section>
+            <Section title="How We Use Information">
+              <ul className="list-disc ml-5 space-y-2">
+                <li>Provide and improve platform features</li>
+                <li>Personalize your experience</li>
+                <li>Respond to support requests</li>
+                <li>Maintain security and prevent abuse</li>
+              </ul>
+            </Section>
 
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-3">
-          Cookies & Tracking
-        </h2>
-        <p>
-          We use cookies to enhance experience. You can manage cookie settings
-          via your browser preferences.
-        </p>
-      </section>
+            <Section title="Data Sharing">
+              <p>
+                We do not sell your personal data. We may share limited data
+                with infrastructure providers and analytics services strictly
+                to operate the platform or when legally required.
+              </p>
+            </Section>
 
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-3">
-          Your Rights
-        </h2>
-        <p>
-          You may review, update, or delete your personal information by
-          contacting us at support@collegecompanion.app.
-        </p>
-      </section>
+            <Section title="Cookies">
+              <p>
+                We use cookies and similar technologies to enhance performance
+                and remember preferences. You can disable cookies in your
+                browser settings.
+              </p>
+            </Section>
 
-      <section className="mt-12 text-sm text-gray-600">
-        <p>
-          By using our website, you agree to this Privacy Policy. We may update
-          this policy from time to time, and changes will be posted here.
-        </p>
-      </section>
+            <Section title="Your Rights">
+              <p>
+                You may request access, correction, or deletion of your data by
+                contacting support. We will respond within a reasonable time.
+              </p>
+            </Section>
+
+            <Section title="Policy Updates">
+              <p>
+                We may update this policy periodically. Continued use of the
+                service means you accept the revised policy.
+              </p>
+            </Section>
+
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 };
